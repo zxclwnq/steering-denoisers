@@ -69,6 +69,17 @@ Recollection is deterministic given the seeds and token counts in the configs, a
 `scripts/validate_activations.py` checks a recollected artifact against the
 recorded split fingerprint before any training run may use it.
 
+## Content note for Experiment D
+
+The tracked artifacts for Experiment D include raw model completions from
+harmful-prompt refusal-ablation evaluations. Because removing the refusal
+direction can cause the model to answer prompts it would normally refuse, some
+of these completions may contain unsafe or harmful content.
+
+These rows are retained solely to preserve the provenance of the causal-control
+results reported in §12.4. They are not required for ordinary use of the code
+or for rebuilding the report.
+
 ## The one set of numbers not recomputed from a result artifact
 
 The weights and training config of the early Gaussian denoiser
