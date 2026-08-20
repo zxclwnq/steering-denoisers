@@ -1,0 +1,132 @@
+{
+  "spec": {
+    "n_rows": 4096,
+    "n_directions": 64,
+    "row_seed": 20260815,
+    "direction_seed": 20260816,
+    "noise_seed": 20260817,
+    "permutation_seed": 20260818,
+    "t_values": [
+      0.5,
+      0.75,
+      0.9,
+      1.0
+    ],
+    "version": "condition_use_v1"
+  },
+  "n_rows": 4096,
+  "n_directions": 64,
+  "direction_pool": {
+    "split": "training_only",
+    "source": "sae:gpt2-small-res-jb/blocks.7.hook_resid_pre@57d08a4fd333fbf18caf3fbea63ceeb88e2f50d9 weights_sha256:47bfb75008fdd7ebf068044c0c3a212606aaa3f5dc05f1d1a7cffe502002c0b6 direction:unit_normalized_W_dec_row universe:23610/24576 labeller:gpt-4o-mini firing_rate:[0.0001,0.02] explanations_sha256:7b2fd33704260489b65e2091115c6ca6a40f5fc3298cc406ecf428b45fc7580f feature_stats_sha256:c27629b4c51b43e2f2906459400e22b9c7742f1902d577132f6671ba2c9f0317 selection_rule_sha256:455ff5bae701d20ddf1d88fc90191c81d7dca1b328c893835a39ab087b262b5e",
+    "selection": "blake2b_priority_rank/interp.selection.stable_order@v2",
+    "selection_seed": 20260807,
+    "min_rank": 256,
+    "excluded_splits": [
+      "dev",
+      "held_out"
+    ],
+    "n_directions": 23354,
+    "digest": "45241c49814abe71ed7106e1a0fcbbe7d8aad40b215621674ec72ee7356d7a2c",
+    "observed_min_rank": 256,
+    "observed_max_rank": 23609
+  },
+  "by_t": [
+    {
+      "t": 0.5,
+      "flow_mse_correct": 0.600299596786499,
+      "coordinate_abs_error_correct": 0.824037290058186,
+      "requested_coordinate_abs_error_correct": 0.824037290058186,
+      "flow_mse_shuffled_target": 0.6019973754882812,
+      "coordinate_abs_error_shuffled_target": 0.8968896857732034,
+      "requested_coordinate_abs_error_shuffled_target": 8.114485195706948,
+      "flow_mse_shuffled_direction": 0.6006511449813843,
+      "coordinate_abs_error_shuffled_direction": 0.8462777910172008,
+      "requested_coordinate_abs_error_shuffled_direction": 8.32280294051452,
+      "gap_shuffled_target": 0.0016977787017822266,
+      "gap_shuffled_direction": 0.0003515481948852539,
+      "prediction_norm_correct": 32.7300310684368,
+      "swap_sensitivity_shuffled_target": 0.866769348770422,
+      "relative_swap_sensitivity_shuffled_target": 0.026482386984541875,
+      "swap_sensitivity_shuffled_direction": 0.45444188048446676,
+      "relative_swap_sensitivity_shuffled_direction": 0.013884553898963686
+    },
+    {
+      "t": 0.75,
+      "flow_mse_correct": 0.7021024227142334,
+      "coordinate_abs_error_correct": 1.2975716288128751,
+      "requested_coordinate_abs_error_correct": 1.2975716288128751,
+      "flow_mse_shuffled_target": 0.7166500091552734,
+      "coordinate_abs_error_shuffled_target": 1.8110746501915855,
+      "requested_coordinate_abs_error_shuffled_target": 7.3406174227602605,
+      "flow_mse_shuffled_direction": 0.7064715623855591,
+      "coordinate_abs_error_shuffled_direction": 1.4945511194018763,
+      "requested_coordinate_abs_error_shuffled_direction": 8.199145583661448,
+      "gap_shuffled_target": 0.014547586441040039,
+      "gap_shuffled_direction": 0.004369139671325684,
+      "prediction_norm_correct": 31.520010215230286,
+      "swap_sensitivity_shuffled_target": 2.417508196688601,
+      "relative_swap_sensitivity_shuffled_target": 0.07669757021590289,
+      "swap_sensitivity_shuffled_direction": 1.3773317947304804,
+      "relative_swap_sensitivity_shuffled_direction": 0.04369706054425584
+    },
+    {
+      "t": 0.9,
+      "flow_mse_correct": 1.15703284740448,
+      "coordinate_abs_error_correct": 1.3853551540960325,
+      "requested_coordinate_abs_error_correct": 1.3853551540960325,
+      "flow_mse_shuffled_target": 1.2196040153503418,
+      "coordinate_abs_error_shuffled_target": 4.266433693137515,
+      "requested_coordinate_abs_error_shuffled_target": 4.767759895312338,
+      "flow_mse_shuffled_direction": 1.182279109954834,
+      "coordinate_abs_error_shuffled_direction": 2.7644101593687083,
+      "requested_coordinate_abs_error_shuffled_direction": 7.811838622605137,
+      "gap_shuffled_target": 0.06257116794586182,
+      "gap_shuffled_direction": 0.025246262550354004,
+      "prediction_norm_correct": 25.519027704838663,
+      "swap_sensitivity_shuffled_target": 5.600811794011406,
+      "relative_swap_sensitivity_shuffled_target": 0.21947590867458622,
+      "swap_sensitivity_shuffled_direction": 3.5801973321274545,
+      "relative_swap_sensitivity_shuffled_direction": 0.14029520926648054
+    },
+    {
+      "t": 1.0,
+      "flow_mse_correct": 1.0041275024414062,
+      "coordinate_abs_error_correct": 1.3147620962954534,
+      "requested_coordinate_abs_error_correct": 1.3147620962954534,
+      "flow_mse_shuffled_target": 1.0434660911560059,
+      "coordinate_abs_error_shuffled_target": 4.5419528931888635,
+      "requested_coordinate_abs_error_shuffled_target": 4.425639880646486,
+      "flow_mse_shuffled_direction": 1.0166256427764893,
+      "coordinate_abs_error_shuffled_direction": 2.892402007608325,
+      "requested_coordinate_abs_error_shuffled_direction": 7.715864042598696,
+      "gap_shuffled_target": 0.03933858871459961,
+      "gap_shuffled_direction": 0.012498140335083008,
+      "prediction_norm_correct": 27.726651415694505,
+      "swap_sensitivity_shuffled_target": 4.35631808005823,
+      "relative_swap_sensitivity_shuffled_target": 0.1571166317470404,
+      "swap_sensitivity_shuffled_direction": 2.56805752081425,
+      "relative_swap_sensitivity_shuffled_direction": 0.09262054340109085
+    }
+  ],
+  "mean_gap_shuffled_target": 0.029538780450820923,
+  "mean_gap_shuffled_direction": 0.010616272687911987,
+  "max_gap_shuffled_target": 0.06257116794586182,
+  "mean_relative_swap_sensitivity_target": 0.11994312440551785,
+  "mean_relative_swap_sensitivity_direction": 0.07262434177769772,
+  "checkpoint": "/workspace/checkpoints/conditional_flow_60m_fw32m_v1/step_250000.pt",
+  "checkpoint_sha256": "5888352a066d25f77f508b671726860848da133597b816b7e9f12db064830ba9",
+  "checkpoint_step": 250000,
+  "experiment_id": "conditional_flow_60m_fw32m_v1",
+  "config_fingerprint": "e5279a77f79f84a289a759d999889f5184e2fbcc2f3e22c1ad3a02d4ba36d950",
+  "val_flow_mse_at_checkpoint": 0.8269649177789689,
+  "validation_activations": {
+    "name": "resid7_fw_val_1024k_v1",
+    "shape": [
+      1024128,
+      768
+    ],
+    "token_cache_sha256": "715b1cc940c321487c1f8242b6880b438547ad4dbbf9b899112367f5275983aa"
+  },
+  "mechanical_pass": true
+}

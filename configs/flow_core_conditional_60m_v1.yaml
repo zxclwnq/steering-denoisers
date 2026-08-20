@@ -1,0 +1,79 @@
+version: 1
+status: clean_reimplementation
+
+# Conditional (steering-aware) variant of configs/flow_core_wide_60m_v1.yaml.
+#
+# The base prior is byte-for-byte the same architecture family, width, block
+# count, time embedding, flow path, and velocity target as the wide 60M
+# unconditional prior. The only addition is a condition encoder for the pair
+#
+#     (v_x, c_x)  <->  the raw-space constraint <h, v> = c_target
+#
+# injected into every block alongside the existing time conditioning. Block
+# count and internal width are deliberately NOT increased: this must remain a
+# conditioning experiment, not a capacity experiment.
+#
+# NOT FROZEN, NOT APPROVED, NOT LAUNCHED. No training run is authorized.
+architecture:
+  kind: tokenwise_time_conditioned_swiglu
+  activation_dim: 768
+  d_model: 1536
+  d_mlp: 3072
+  n_blocks: 3
+  norm: layernorm
+  time_conditioning: multiplicative_gate
+  # Base prior only; the conditioning overhead is counted separately below.
+  n_params_expected: 60407808
+
+time_embedding:
+  kind: continuous_sinusoidal
+  dim: 256
+  hidden: 768
+  out_dim: 1536
+  max_period: 10000.0
+
+objective:
+  kind: flow_matching
+  coordinates: standardized_activation
+  path: linear_interpolation
+  data_time: 0.0
+  noise_time: 1.0
+  target: eps_minus_x0
+  loss: mean_squared_error
+
+conditioning:
+  type: direction_coordinate
+  coordinate: linear_projection
+  feature_id_conditioning: false
+  encoder: direction_coordinate_film
+  cond_hidden: 256
+  # Linear(768, 256) + Linear(1, 256) x2 + Linear(256, 1536)
+  n_params_expected: 592640
+  # Raw -> standardized hyperplane, with scale = std + normalizer eps:
+  #   q = scale * v ; v_x = q / ||q|| ; c_x = (c_target - <mu, v>) / ||q||
+  # canonicalized so the largest-magnitude component of v_x is positive.
+  standardization: exact_hyperplane_transform
+  sign_convention: max_abs_component_positive
+
+training:
+  # Conditioning targets each activation's own naturally occurring coordinate
+  # c_raw = <h, v>. The objective stays pure flow matching: no coordinate
+  # auxiliary loss, no steering corruption, no reconstruction or SAE term.
+  condition_source: natural_coordinate
+  auxiliary_losses: none
+  direction_pool:
+    split: training_only
+    min_rank: 256
+    # docs/STRUCTURED_CORRUPTION_PROPOSAL.md section 5. DEV and held-out
+    # directions sit below rank 64 in the same frozen ordering; the pool floor
+    # of 256 establishes disjointness without enumerating any evaluation ID.
+    protected_manifest_access: forbidden
+
+inference:
+  seed: h + (c_target - <h, v>) v
+  additive_equivalent: c_target = <h, v> + alpha
+  absolute_clamp: c_target = alpha
+  # SDEdit-style, identical to the unconditional sampler; the condition is held
+  # fixed across the whole trajectory.
+  final_projection_default: false
+  t_start_zero_semantics: exact_seed_identity_zero_evaluations

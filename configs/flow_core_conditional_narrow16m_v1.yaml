@@ -1,0 +1,57 @@
+version: 1
+status: clean_reimplementation
+
+# Conditional (direction/coordinate-aware) variant of configs/flow_core_v1.yaml,
+# the frozen narrow ~16M architecture.
+#
+# This is the architecture the constraint-preserving tangent branch trains first
+# (docs/TANGENT_FLOW_PROTOCOL.md, stage T1). The base prior is byte-for-byte the
+# same family, width, block count, time embedding, flow path, and velocity target
+# as the narrow unconditional prior. The only addition is the existing condition
+# encoder for the pair
+#
+#     (v_x, c_x)  <->  the raw-space constraint <h, v> = c_target
+#
+# The tangent objective changes the *corruption geometry*, not the architecture:
+# no new modules, no new conditioning signal. The ~60M variant
+# (configs/flow_core_conditional_60m_v1.yaml) remains instantiable with no code
+# change if T1 and T2 ever justify a confirmation run.
+architecture:
+  kind: tokenwise_time_conditioned_swiglu
+  d_model: 768
+  d_mlp: 1536
+  n_blocks: 3
+  norm: layernorm
+  time_conditioning: multiplicative_gate
+  # Base prior only; the conditioning overhead is counted separately below.
+  n_params_expected: 16147200
+
+time_embedding:
+  kind: continuous_sinusoidal
+  dim: 256
+  hidden: 768
+  out_dim: 768
+  max_period: 10000.0
+
+objective:
+  kind: flow_matching
+  coordinates: standardized_activation
+  path: linear_interpolation
+  data_time: 0.0
+  noise_time: 1.0
+  target: eps_minus_x0
+  loss: mean_squared_error
+
+conditioning:
+  type: direction_coordinate
+  coordinate: linear_projection
+  feature_id_conditioning: false
+  encoder: direction_coordinate_film
+  cond_hidden: 256
+  # Linear(768, 256) + Linear(1, 256) x2 + Linear(256, 768)
+  n_params_expected: 395264
+  # Raw -> standardized hyperplane, with scale = std + normalizer eps:
+  #   q = scale * v ; v_x = q / ||q|| ; c_x = (c_target - <mu, v>) / ||q||
+  # canonicalized so the largest-magnitude component of v_x is positive.
+  standardization: exact_hyperplane_transform
+  sign_convention: max_abs_component_positive

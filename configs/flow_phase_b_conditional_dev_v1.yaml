@@ -1,0 +1,90 @@
+version: 1
+# SUPERSEDED 2026-08-15 by docs/BRANCH_CLOSURE_GENERIC_FLOW_NATURALIZATION.md.
+# The branch is closed; this DEV sweep was never frozen and must not be run.
+status: draft_not_frozen_superseded_branch_closed
+experiment_id: conditional_flow_phase_b_dev_v1
+experiment_class: dev_method_development
+phase: B_conditional_dev_steering
+split: dev
+final_evaluation_access: forbidden
+protocol: docs/PHASE_B_CONDITIONAL_PROTOCOL.md
+
+# This config is DRAFT. Freezing it, and running any DEV generation with it,
+# requires explicit human approval (PHASE_B_CONDITIONAL_PROTOCOL.md section 1).
+# The frozen unconditional protocol configs/flow_phase_b_dev_v1.yaml is NOT
+# modified by this experiment and its results remain valid.
+
+# Vectors, prompts, decoding, metrics, alpha grid, and the degeneration gate are
+# inherited verbatim from the frozen Phase B config so the two methods stay
+# numerically comparable. Only the intervention and the t_start grid differ.
+inherits:
+  config: configs/flow_phase_b_dev_v1.yaml
+  fields: [model, sae, generation, vectors, noise]
+
+conditional_checkpoint:
+  experiment_id: conditional_flow_60m_fw32m_v1
+  checkpoint: best_step_249500.pt
+  checkpoint_sha256: 83324cfab50eb7d055ac69f864bf7972f56e8a45bcdecaaf7d9eff7841933f76
+  config_fingerprint: e5279a77f79f84a289a759d999889f5184e2fbcc2f3e22c1ad3a02d4ba36d950
+  selection_metric: val_flow_mse
+  selection_mode: min
+  val_flow_mse: 0.8269649088382721
+  direction_pool_split: training_only
+  direction_pool_excluded: [dev, held_out]
+
+flow:
+  kind: conditional_coordinate_request
+  integrator: reverse_explicit_euler
+  seed_mode: clean
+  coordinate_mode: additive
+  # t_start grid derived from the concept-independent condition-use diagnostic
+  # (results/condition_use_v1/), recorded before any DEV steering result was
+  # observed. See PHASE_B_CONDITIONAL_PROTOCOL.md section 5.1. The frozen grid
+  # {0.10, 0.25, 0.50} lies where this model ignores the condition.
+  t_start: [0.50, 0.75, 0.90]
+  nfe: [1, 3, 5]
+  off_distribution_norm: 600.0
+  guard_fallback: additive
+
+condition_use_evidence:
+  source: results/condition_use_v1/best_step_249500.json
+  spec_version: condition_use_v1
+  relative_swap_sensitivity_target:
+    t_0.50: 0.02648
+    t_0.75: 0.07670
+    t_0.90: 0.21948
+    t_1.00: 0.15712
+
+baselines:
+  reuse_existing: true
+  additive: results/phase_b_wide60m_v1/baselines/additive.rescored.meta.json
+  shrinkage_k080: results/phase_b_wide60m_v1/baselines/shrinkage_k080.rescored.meta.json
+  unconditional_flow: results/phase_b_wide60m_v1/flow
+  note: >-
+    Only the nine conditional arms consume new compute. Regenerating the
+    baselines would break comparability with frozen Phase B.
+
+controls:
+  matched_realised_projection: required
+  vs_additive: required
+  vs_shrinkage_k080: required
+  vs_unconditional_flow_at_t050: required
+
+hypotheses: [C1, C2, C3, C4, C5, C6]
+stop_rule: >-
+  If C1 fails (requested coordinate is not realised above chance), C2 through C4
+  are uninterpretable and the experiment stops before semantic auditing.
+
+protected_data:
+  held_out: forbidden
+  llm_judges: not_authorized_at_this_stage
+
+smoke:
+  purpose: operational_only_no_scientific_selection
+  vector: allegations
+  prompt_id: 0
+  generation_seed: 0
+  alpha_hat: 0.1
+  t_start: 0.90
+  nfe: 1
+  max_new_tokens: 2

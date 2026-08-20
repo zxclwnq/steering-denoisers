@@ -1,0 +1,51 @@
+{
+  "clean_lm_loss": 3.770203225314617,
+  "classifier": "natural_support_v1 + specified quality clause",
+  "per_t_start": {
+    "t0.50_nfe1": {
+      "category_with_quality_clause": "B",
+      "reasons": [
+        "slope=0.0551 (CI 0.0412..0.0723)",
+        "shuffled-minus-correct coordinate error gap=+1.3344",
+        "fraction moving in requested direction=0.569",
+        "directions with positive slope=1.000",
+        "LOVO slope min=0.0471",
+        "monotonic across target quantiles=False",
+        "delta_lm=+0.233 vs clean=3.770 (budget 25%); quality_ok=True"
+      ],
+      "self_arm_delta_lm": 0.23276960849761963,
+      "control_marginal_delta_lm": 0.0019575469195842743,
+      "monotonic": false
+    },
+    "t0.75_nfe1": {
+      "category_with_quality_clause": "B",
+      "reasons": [
+        "slope=0.2124 (CI 0.1613..0.2706)",
+        "shuffled-minus-correct coordinate error gap=+1.3296",
+        "fraction moving in requested direction=0.712",
+        "directions with positive slope=1.000",
+        "LOVO slope min=0.1924",
+        "monotonic across target quantiles=True",
+        "delta_lm=+1.146 vs clean=3.770 (budget 25%); quality_ok=False"
+      ],
+      "self_arm_delta_lm": 1.1455943658947945,
+      "control_marginal_delta_lm": 0.06683653593063354,
+      "monotonic": true
+    },
+    "t0.90_nfe1": {
+      "category_with_quality_clause": "A_controllability_quality_blocked",
+      "reasons": [
+        "slope=0.9061 (CI 0.8667..0.9466)",
+        "shuffled-minus-correct coordinate error gap=+2.5263",
+        "fraction moving in requested direction=0.908",
+        "directions with positive slope=1.000",
+        "LOVO slope min=0.8926",
+        "monotonic across target quantiles=True",
+        "delta_lm=+4.077 vs clean=3.770 (budget 25%); quality_ok=False"
+      ],
+      "self_arm_delta_lm": 4.077040582895279,
+      "control_marginal_delta_lm": 0.7911144644021988,
+      "monotonic": true
+    }
+  }
+}

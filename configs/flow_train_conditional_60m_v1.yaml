@@ -1,0 +1,88 @@
+version: 1
+experiment_id: conditional_flow_60m_fw32m_v1
+experiment_class: conditional_prior_method_development
+# AUTHORIZED by explicit human instruction 2026-08-15 (same message accepted the
+# rebuilt-artifact SHA difference; see results/rebuild_20260815/).
+status: authorized
+flow_core_config: configs/flow_core_conditional_60m_v1.yaml
+
+experiment_card:
+  hypothesis: >-
+    A flow prior conditioned on (direction, linear coordinate) can produce a natural
+    activation that respects a requested coordinate along a direction never seen in
+    training, without the hard projection an ordinary clamp performs.
+  independent_variable: conditioning on the hyperplane (v_x, c_x); nothing else
+  controlled_variables:
+    - activation dataset, document-level split, and train-only normalization
+    - flow path, velocity target, and time convention
+    - base architecture width, depth, and time embedding
+    - optimizer, learning rate, weight decay, warmup, batch size, and seeds
+    - validation sampling and checkpoint-selection metric
+  baseline: wide60m_fw32m unconditional prior, same data and budget
+  metrics:
+    - val_flow_mse
+    - val_flow_mse_by_bin
+    - zero_predictor_mse
+    - val_cosine_velocity
+  expected_failure_mode: >-
+    the model ignores (v_x, c_x) and collapses to the unconditional prior, or fits
+    the condition only for pool directions and fails to transfer
+  success_criterion: complete finite run with checkpoint selected only by val_flow_mse
+
+data:
+  dataset: resid7_fw_train_32000k_v1
+  split: train
+  repository: HuggingFaceFW/fineweb
+  repository_config: sample-10BT
+  repository_revision: 9bb295ddab0e05d785b879661af7260fed5140fc
+  tokenizer: gpt2
+  per_seq: 127
+  val_fraction: 0.05
+  split_seed: 20260807
+  split_fingerprint: 02dad171587ee40f
+  bos_dropped: true
+  steering_vectors_used: false
+
+conditioning:
+  # Directions come only from the training-only pool manifest; DEV and held-out
+  # steering vectors never enter training. The manifest carries its own provenance
+  # digest, verified at load time.
+  direction_pool: data/direction_pools/training_only_rank256_v1.pt
+  direction_pool_split: training_only
+  steering_vector_conditioning: false
+  coordinate: linear_projection
+  condition_source: natural_coordinate
+
+normalization:
+  statistics_from: train_split_only
+  eps: 1.0e-5
+  accumulation_dtype: float64
+
+training:
+  seed: 0
+  noise_seed: 20260812
+  steps: 250000
+  batch_size: 1024
+  optimizer: adamw
+  lr: 3.0e-4
+  weight_decay: 0.01
+  schedule: cosine
+  warmup_steps: 500
+  grad_clip: 1.0
+  dtype: float32
+  eval_every: 500
+
+validation:
+  seed: 0
+  batches: 20
+  t_bins: [0.0, 0.10, 0.25, 0.50, 0.75, 1.0]
+  selection_metric: val_flow_mse
+  selection_mode: min
+
+checkpoints:
+  save_steps: [10000, 20000, 50000, 100000, 150000, 200000, 250000]
+  keep: [best, last, configured_steps]
+  include_optimizer_state: true
+
+protected_data:
+  held_out: forbidden
