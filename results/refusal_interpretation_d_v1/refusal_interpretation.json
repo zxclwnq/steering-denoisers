@@ -1,0 +1,359 @@
+{
+  "experiment": "refusal_geometry_interpretation_d_v1",
+  "phase": "interpretation",
+  "class": "post_stop_method_development",
+  "protocol": "docs/EXPERIMENT_D_PROTOCOL.md",
+  "generated_utc": "2026-08-20T08:30:10.787299+00:00",
+  "source_revision": "snapshot-sha256:74a353cc18fbf25665b9d555ac95aa2c70d0e11f15eedd213078e4ba15c25de9",
+  "geometry_source": "results/refusal_geometry_d_v1",
+  "causal_validation": {
+    "source": "/workspace/results/refusal_causal_validation_d_v1",
+    "verdict": "CAUSAL_CONTROL_PASS",
+    "ablation_refusal_drop_pp": 94.0,
+    "addition_refusal_rise_pp": 98.0
+  },
+  "d_main_class_balanced": {
+    "usable_secants": 0,
+    "sufficient_for_a_claim": false,
+    "note": "the primary class-balanced analysis is UNDEFINED: the refusal coordinate separates harmful from harmless so completely that no coordinate bin holds enough of both classes to balance. This was anticipated in the protocol; the within-class analyses carry the interpretation and the reliability ceiling is stated with them"
+  },
+  "analyses": {
+    "d_harmful_only": {
+      "analysis": "d_harmful_only",
+      "n_rows": 572,
+      "usable_secants": 3,
+      "alignment_profile": [
+        null,
+        0.7136524761361067,
+        0.8387063769120126,
+        0.6795401895363994,
+        null
+      ],
+      "random_alignment_profile_mean": [
+        null,
+        0.06973022227551852,
+        0.07234961842901884,
+        0.06780553443423139,
+        null
+      ],
+      "central_rung_vs_random": {
+        "usable": true,
+        "value": 0.8387063769120126,
+        "random_mean": 0.07234961842901882,
+        "random_ci_lower": 0.05310925605671223,
+        "random_ci_upper": 0.09648495375394442,
+        "random_min": 0.04940029445017981,
+        "random_max": 0.10073421430953478,
+        "n_random": 128,
+        "outside_random_range": true,
+        "above_random_interval": true,
+        "below_random_interval": false
+      },
+      "tail_minus_central": {
+        "usable": false,
+        "reason": "the tail or central rung is not estimable"
+      },
+      "pooled_alignment_vs_random": {
+        "usable": true,
+        "value": 0.7439663475281728,
+        "random_mean": 0.0699617917129229,
+        "random_ci_lower": 0.05833950730927696,
+        "random_ci_upper": 0.08691610902138174,
+        "random_min": 0.050404260852866374,
+        "random_max": 0.090621738993328,
+        "n_random": 128,
+        "fraction_of_random_axes_below": 1.0,
+        "outside_random_range": true,
+        "above_random_interval": true,
+        "below_random_interval": false
+      },
+      "curvature_vs_random": {
+        "usable": true,
+        "value": 0.712470086444503,
+        "random_mean": 0.3078727045301854,
+        "random_ci_lower": -0.027371183713352853,
+        "random_ci_upper": 0.613840881458427,
+        "random_min": -0.14390496282096163,
+        "random_max": 0.6479103025582753,
+        "n_random": 128,
+        "fraction_of_random_axes_below": 1.0,
+        "outside_random_range": true,
+        "above_random_interval": true,
+        "below_random_interval": false
+      },
+      "shortfall_vs_random": {
+        "usable": false,
+        "n_random": 0
+      },
+      "reliability_ceiling_available": false,
+      "variance_control": {
+        "variance_along_refusal_direction": 7.37250438829309,
+        "variance_share_of_total": 0.10193614097170815,
+        "leading_component_variance": 10.955856724826754,
+        "refusal_pooled_cos_secant_direction": 0.7439663475281728,
+        "principal_components": [
+          {
+            "component": 0,
+            "variance": 10.955856724826754,
+            "variance_ratio_to_refusal": 1.486042753968885,
+            "pooled_cos_secant_direction": 0.8793593304599185,
+            "central_cos_secant_direction": 0.9132560535591593
+          },
+          {
+            "component": 1,
+            "variance": 8.874313492175396,
+            "variance_ratio_to_refusal": 1.2037040637462422,
+            "pooled_cos_secant_direction": 0.7062478104177967,
+            "central_cos_secant_direction": 0.7433643819455503
+          },
+          {
+            "component": 2,
+            "variance": 6.026101562615703,
+            "variance_ratio_to_refusal": 0.8173751069154519,
+            "pooled_cos_secant_direction": 0.6595203776807662,
+            "central_cos_secant_direction": 0.6341545875183227
+          },
+          {
+            "component": 3,
+            "variance": 3.294105413227079,
+            "variance_ratio_to_refusal": 0.446809556120148,
+            "pooled_cos_secant_direction": 0.6790711036655956,
+            "central_cos_secant_direction": 0.698353254476483
+          },
+          {
+            "component": 4,
+            "variance": 2.9570684718801528,
+            "variance_ratio_to_refusal": 0.40109416232776013,
+            "pooled_cos_secant_direction": 0.5341902288358594,
+            "central_cos_secant_direction": 0.5978826447906442
+          },
+          {
+            "component": 5,
+            "variance": 2.1712180138711985,
+            "variance_ratio_to_refusal": 0.2945020985431908,
+            "pooled_cos_secant_direction": 0.6404222846480095,
+            "central_cos_secant_direction": 0.7754959052303314
+          },
+          {
+            "component": 6,
+            "variance": 1.912837027154259,
+            "variance_ratio_to_refusal": 0.2594555291403667,
+            "pooled_cos_secant_direction": 0.46845606320570415,
+            "central_cos_secant_direction": 0.4679636838467736
+          },
+          {
+            "component": 7,
+            "variance": 1.7386177856233735,
+            "variance_ratio_to_refusal": 0.23582458470749107,
+            "pooled_cos_secant_direction": 0.4990734090916855,
+            "central_cos_secant_direction": 0.46455733248974884
+          }
+        ],
+        "best_component_pooled_alignment": 0.8793593304599185,
+        "refusal_exceeds_every_component": false,
+        "note": "principal components are chosen by variance alone and have no validated causal effect; they are the control for the possibility that alignment merely tracks variance"
+      },
+      "outcome": {
+        "gate": "D-geometry",
+        "outcome": "CAUSAL_DIRECTION_ALIGNED",
+        "why": "the causal direction tracks the local direction of natural motion better than matched random axes do; the SAE steering directions in the GPT-2 experiment did not. Positive control only -- different model, layer and token semantics, so no cross-model causal taxonomy follows",
+        "pooled_alignment_above_random": true,
+        "central_alignment_above_random": true,
+        "alignment_falls_away_from_the_centre": false,
+        "any_statistic_differs_from_random": true,
+        "prohibited_claims": [
+          "SAE features are merely correlational",
+          "causal directions differ from correlational directions in general",
+          "any cross-model causal taxonomy"
+        ],
+        "licensed_question": "can the Experiment C diagnostic behave differently on an independently validated causal linear direction?"
+      }
+    },
+    "d_harmless_only": {
+      "analysis": "d_harmless_only",
+      "n_rows": 6266,
+      "usable_secants": 5,
+      "alignment_profile": [
+        0.19481888689817808,
+        0.29209900371526015,
+        0.36067502048874234,
+        0.41799879071875845,
+        0.6828669691728926
+      ],
+      "random_alignment_profile_mean": [
+        0.09017806370086098,
+        0.09832321284659268,
+        0.10190931776333938,
+        0.09851196446047522,
+        0.09075341032270434
+      ],
+      "central_rung_vs_random": {
+        "usable": true,
+        "value": 0.36067502048874234,
+        "random_mean": 0.10190931776333936,
+        "random_ci_lower": 0.0722595249419835,
+        "random_ci_upper": 0.14170919139528235,
+        "random_min": 0.06542154254226244,
+        "random_max": 0.15750213617806166,
+        "n_random": 128,
+        "outside_random_range": true,
+        "above_random_interval": true,
+        "below_random_interval": false
+      },
+      "tail_minus_central": {
+        "usable": true,
+        "mean": 0.2878774074394747,
+        "ci_lower": 0.224589642556216,
+        "ci_upper": 0.3441766604676039,
+        "confidence": 0.95,
+        "n_resamples": 1000,
+        "resampling": "paired_prompt_bootstrap"
+      },
+      "pooled_alignment_vs_random": {
+        "usable": true,
+        "value": 0.38969173419876635,
+        "random_mean": 0.0959351938187945,
+        "random_ci_lower": 0.07765675250352638,
+        "random_ci_upper": 0.11861855470930019,
+        "random_min": 0.07429805579188216,
+        "random_max": 0.13421273896506844,
+        "n_random": 128,
+        "fraction_of_random_axes_below": 1.0,
+        "outside_random_range": true,
+        "above_random_interval": true,
+        "below_random_interval": false
+      },
+      "curvature_vs_random": {
+        "usable": true,
+        "value": 0.6950564077450204,
+        "random_mean": 0.6571979931530654,
+        "random_ci_lower": 0.5487944807538341,
+        "random_ci_upper": 0.770511430703788,
+        "random_min": 0.46774222946740784,
+        "random_max": 0.8166386713585844,
+        "n_random": 128,
+        "fraction_of_random_axes_below": 0.703125,
+        "outside_random_range": false,
+        "above_random_interval": false,
+        "below_random_interval": false
+      },
+      "shortfall_vs_random": {
+        "usable": true,
+        "value": 0.24288012710901646,
+        "random_mean": 0.2608693937933555,
+        "random_ci_lower": 0.15016776086687386,
+        "random_ci_upper": 0.3691222257361344,
+        "random_min": 0.10618196439217548,
+        "random_max": 0.40666371412555513,
+        "n_random": 128,
+        "fraction_of_random_axes_below": 0.375,
+        "outside_random_range": false,
+        "above_random_interval": false,
+        "below_random_interval": false
+      },
+      "reliability_ceiling_available": true,
+      "variance_control": {
+        "variance_along_refusal_direction": 0.725542332395708,
+        "variance_share_of_total": 0.009073027540931398,
+        "leading_component_variance": 8.969331474978288,
+        "refusal_pooled_cos_secant_direction": 0.38969173419876635,
+        "principal_components": [
+          {
+            "component": 0,
+            "variance": 8.969331474978288,
+            "variance_ratio_to_refusal": 12.362244178588396,
+            "pooled_cos_secant_direction": 0.7011919085497,
+            "central_cos_secant_direction": 0.8164401737296734
+          },
+          {
+            "component": 1,
+            "variance": 6.635418654079615,
+            "variance_ratio_to_refusal": 9.145460378817267,
+            "pooled_cos_secant_direction": 0.724259690650871,
+            "central_cos_secant_direction": 0.8526921746668537
+          },
+          {
+            "component": 2,
+            "variance": 6.328746020271598,
+            "variance_ratio_to_refusal": 8.722779826470449,
+            "pooled_cos_secant_direction": 0.602529644915105,
+            "central_cos_secant_direction": 0.635094879604602
+          },
+          {
+            "component": 3,
+            "variance": 4.688022429314719,
+            "variance_ratio_to_refusal": 6.461404414315951,
+            "pooled_cos_secant_direction": 0.602964545119322,
+            "central_cos_secant_direction": 0.6647593263499196
+          },
+          {
+            "component": 4,
+            "variance": 2.776819643818033,
+            "variance_ratio_to_refusal": 3.827233119050545,
+            "pooled_cos_secant_direction": 0.6690599909248489,
+            "central_cos_secant_direction": 0.7645996137234315
+          },
+          {
+            "component": 5,
+            "variance": 2.292119969171857,
+            "variance_ratio_to_refusal": 3.1591815760816884,
+            "pooled_cos_secant_direction": 0.6638612635346646,
+            "central_cos_secant_direction": 0.8200238614553547
+          },
+          {
+            "component": 6,
+            "variance": 1.9262582796422731,
+            "variance_ratio_to_refusal": 2.6549219716537493,
+            "pooled_cos_secant_direction": 0.6346557140768919,
+            "central_cos_secant_direction": 0.828890724921391
+          },
+          {
+            "component": 7,
+            "variance": 1.8201185689598556,
+            "variance_ratio_to_refusal": 2.508631802295955,
+            "pooled_cos_secant_direction": 0.5959572543306689,
+            "central_cos_secant_direction": 0.7110383307756335
+          }
+        ],
+        "best_component_pooled_alignment": 0.724259690650871,
+        "refusal_exceeds_every_component": false,
+        "note": "principal components are chosen by variance alone and have no validated causal effect; they are the control for the possibility that alignment merely tracks variance"
+      },
+      "outcome": {
+        "gate": "D-geometry",
+        "outcome": "CAUSAL_DIRECTION_ALIGNED",
+        "why": "the causal direction tracks the local direction of natural motion better than matched random axes do; the SAE steering directions in the GPT-2 experiment did not. Positive control only -- different model, layer and token semantics, so no cross-model causal taxonomy follows",
+        "pooled_alignment_above_random": true,
+        "central_alignment_above_random": true,
+        "alignment_falls_away_from_the_centre": false,
+        "any_statistic_differs_from_random": true,
+        "prohibited_claims": [
+          "SAE features are merely correlational",
+          "causal directions differ from correlational directions in general",
+          "any cross-model causal taxonomy"
+        ],
+        "licensed_question": "can the Experiment C diagnostic behave differently on an independently validated causal linear direction?"
+      }
+    }
+  },
+  "post_hoc_variance_control": {
+    "available": true,
+    "class": "post_hoc",
+    "question": "is the alignment about causality, or about how much variance the direction carries?",
+    "refusal_exceeds_every_principal_component": {
+      "d_harmful_only": false,
+      "d_harmless_only": false
+    },
+    "variance_ratio_to_random_axis": {
+      "d_harmful_only": 7.37250438829309,
+      "d_harmless_only": 0.725542332395708
+    },
+    "conclusion": "principal components -- selected by variance alone, with no causal validation whatsoever -- align at least as well as the causal direction. The random-axis reference in the frozen rule is therefore not an adequate control for this statistic: random unit axes in a high-dimensional residual stream carry very little variance, so any structured direction beats them. D provides NO evidence that causal directions are geometrically special",
+    "effect_on_the_preregistered_label": "the label stands as the frozen rule's output and is not rewritten; but the inference it was written to license -- that good causal intervention axes are geometrically distinguishable -- is not supported once variance is controlled"
+  },
+  "recomputes_no_activation": true,
+  "dev_vectors_accessed": false,
+  "held_out_accessed": false,
+  "llm_judge_used": false,
+  "trained_anything": false
+}
