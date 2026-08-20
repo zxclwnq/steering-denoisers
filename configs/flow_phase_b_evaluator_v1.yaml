@@ -1,0 +1,133 @@
+version: 1
+status: frozen_before_full_dev_generation
+experiment_id: clean_flow_phase_b_dev_v1
+experiment_class: dev_method_development
+split: dev
+held_out_access: forbidden
+
+parent_protocol:
+  path: configs/flow_phase_b_dev_v1.yaml
+  sha256: 4d2f0d5a2152f206e261b94107078fa06f253e863681db7e7ca79751b38322d0
+
+flow_checkpoint:
+  path: /workspace/checkpoints/clean_flow_100k_v1_a439b2d7/best_step_099500.pt
+  step: 99500
+  sha256: 9d1d3cb66b9eaab1cbc89edab121d5cfa318271d7502e2ce42230432faad30d2
+
+baselines:
+  - method: additive
+    raw_filename: cmp1_additive_dev.jsonl
+    raw_sha256: ba6a164f7cbd428f65679c67d3f101dafbed31262b07abc78c653d9350f80058
+    meta_filename: cmp1_additive_dev.meta.json
+    meta_sha256: 06904ea3015cc4afa3ea77a176f97a746a88a7f7e09a0a363d351996fcf2405a
+    source_method: additive
+  - method: naive
+    raw_filename: cmp1_naive_dev.jsonl
+    raw_sha256: f382d61303018334ae3001c286eb22ae6426228ad061c49b305ae2e2b543a831
+    meta_filename: cmp1_naive_dev.meta.json
+    meta_sha256: 093f7133d42a89ee69c45ee5c32534ebc74f59e8ec7cf1d2a9ac0c2cbc02d40e
+    source_method: naive
+    denoiser_checkpoint_sha256: 963b4dda162d60f1064b47979843c6ca99b733a1837196abc758432e7770c583
+  - method: shrinkage_k080
+    raw_filename: ct_shrink_k080_dev.jsonl
+    raw_sha256: b9537df71f7bbf5daa1418fe9f2198516e3390cafbea3444a0f4aa50c410d097
+    meta_filename: ct_shrink_k080_dev.meta.json
+    meta_sha256: 69116464b4268104219c4778d9b18a079a44006c37070197b960d2a1e636fb5f
+    source_method: shrinkage
+    kappa: 0.8
+
+metric_versions:
+  text: clean_text_metrics_v1
+  nll: clean_gpt2_conditional_nll_v1
+  sae: clean_frozen_sae_continuation_mean_v1
+  geometry: clean_flow_geometry_v2
+
+control_features:
+  allegations: [19237, 8326, 17561, 7329, 21129, 3409, 3943, 876, 22031, 179,
+                3866, 10736, 23517, 15786, 13521, 8625, 15629, 2107, 18045,
+                19257, 17410, 40, 13776, 4268, 14588, 2479, 1808, 23400,
+                20101, 5768, 1683, 1034]
+  dungeon: [19996, 6678, 2457, 19928, 1411, 9296, 16904, 3976, 11620, 16860,
+            830, 504, 5553, 10623, 4339, 6599, 21309, 8657, 7642, 11723,
+            21813, 21656, 15036, 20151, 23739, 253, 2305, 10541, 19981,
+            19191, 23967, 9780]
+  locations_addresses: [8778, 22789, 7190, 3016, 5156, 303, 21750, 23677,
+                        7415, 11101, 9097, 14603, 2623, 18878, 20795, 21360,
+                        2835, 10137, 7669, 9022, 8756, 23373, 5590, 18341,
+                        23024, 10706, 12648, 4242, 3849, 12454, 24569, 4030]
+  illicit_drugs: [2849, 3839, 8980, 12067, 10497, 21464, 12159, 4531, 14298,
+                  18387, 3956, 427, 14372, 14818, 15903, 14886, 6609, 8736,
+                  4038, 14662, 21577, 3728, 19179, 11115, 2371, 8926, 24104,
+                  19158, 9765, 7230, 7967, 9722]
+  law_enforcement_officials: [18236, 1819, 6987, 4266, 22424, 18633, 2497,
+                              2535, 2708, 14635, 16058, 18635, 23429, 2763,
+                              13221, 984, 24554, 3527, 23884, 11642, 469,
+                              21812, 24471, 2748, 13731, 17523, 23251, 11720,
+                              5874, 1833, 12048, 18629]
+  same_sex_marriage: [9616, 2839, 23993, 14583, 21961, 4103, 23647, 22031,
+                      4405, 10953, 18099, 13629, 11956, 22226, 16803, 15975,
+                      1216, 9526, 16860, 17044, 9510, 21233, 5054, 6765,
+                      18478, 13079, 4829, 6705, 23027, 12494, 14349, 20356]
+  borders: [2709, 8574, 14912, 2958, 7963, 18530, 18315, 6389, 157, 6733,
+            22141, 17426, 23827, 5104, 444, 167, 8994, 12068, 21134, 14022,
+            4889, 7362, 22128, 1071, 18497, 16261, 7914, 18542, 10390, 4439,
+            13134, 83]
+  sports_awards: [19555, 6196, 23492, 15560, 9509, 14654, 19197, 14463,
+                  11347, 9063, 14580, 23456, 10346, 11445, 20901, 17460,
+                  12063, 17359, 11641, 2519, 12992, 10367, 9315, 23262,
+                  14407, 19303, 6122, 15176, 15046, 22600, 17909, 22481]
+
+arms:
+  - {arm_id: flow_t010_nfe1, t_start: 0.10, nfe: 1}
+  - {arm_id: flow_t010_nfe3, t_start: 0.10, nfe: 3}
+  - {arm_id: flow_t010_nfe5, t_start: 0.10, nfe: 5}
+  - {arm_id: flow_t025_nfe1, t_start: 0.25, nfe: 1}
+  - {arm_id: flow_t025_nfe3, t_start: 0.25, nfe: 3}
+  - {arm_id: flow_t025_nfe5, t_start: 0.25, nfe: 5}
+  - {arm_id: flow_t050_nfe1, t_start: 0.50, nfe: 1}
+  - {arm_id: flow_t050_nfe3, t_start: 0.50, nfe: 3}
+  - {arm_id: flow_t050_nfe5, t_start: 0.50, nfe: 5}
+
+noise_identity:
+  namespace: flow_noise_v2
+  position_scheme: prompt_relative_v1
+  fields: [vector, exact_alpha_hex, prompt_id, generation_seed, token_position]
+  independent_of: [t_start, nfe, arm_id, batch_order, padding_length, dataframe_row_order]
+  padding_has_identity: false
+
+statistics:
+  bootstrap_seed: 20260813
+  bootstrap_resamples: 10000
+  bootstrap_confidence: 0.95
+  bootstrap_unit: vector_mean
+  shared_resample_matrix: true
+  repetition_threshold: 0.027785714285713504
+  require_vector_signs: true
+  require_leave_one_vector_out: true
+
+matching:
+  identity: [vector, prompt_id, generation_seed]
+  coordinate: realised_projection
+  interpolation: linear_bracketing
+  extrapolation: forbidden
+  clipping: forbidden
+  record_brackets_and_weight: true
+
+schema_version: clean_phase_b_row_v1
+output_layout_version: clean_phase_b_outputs_v1
+server_output_root: /workspace/results/clean_flow_phase_b_dev_v1
+release_id_rule: experiment_id_plus_full_source_snapshot
+immutable_outputs: true
+
+release_requires:
+  - tested_source_snapshot_sha256
+  - evaluator_config_sha256
+  - parent_protocol_sha256
+  - uv_lock_sha256
+  - flow_checkpoint_sha256
+  - phase_a_report_sha256
+  - sae_config_sha256
+  - sae_weights_sha256
+  - gpt2_model_artifact_sha256
+  - gpt2_tokenizer_artifact_sha256
+  - absolute_output_directory

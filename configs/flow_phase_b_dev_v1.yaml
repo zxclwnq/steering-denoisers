@@ -1,0 +1,162 @@
+version: 1
+status: frozen_dev_protocol
+experiment_id: clean_flow_phase_b_dev_v1
+experiment_class: dev_method_development
+phase: B_dev_steering
+split: dev
+final_evaluation_access: forbidden
+
+phase_a:
+  config_sha256: a762c27be901d6015a06794c695ff8893b107c93861e2599e944dabec4855b5e
+  report_sha256: c8a0ee7602a79e0c6ac4ff094b53b3a740b2ca1c79e418994356eb651ddf2047
+  gate: PASS
+  checkpoint_step: 99500
+  checkpoint_sha256: 9d1d3cb66b9eaab1cbc89edab121d5cfa318271d7502e2ce42230432faad30d2
+  selection_metric: val_flow_mse
+  selection_mode: min
+
+model:
+  name: gpt2-small
+  resolved_name: gpt2
+  revision: 607a30d783dfa663caf39e06633721c8d4cfcd7e
+  hook: blocks.7.hook_resid_pre
+  d_model: 768
+
+sae:
+  release: gpt2-small-res-jb
+  repo_id: jbloom/GPT2-Small-SAEs-Reformatted
+  revision: 57d08a4fd333fbf18caf3fbea63ceeb88e2f50d9
+  neuronpedia_id: gpt2-small/7-res-jb
+  model_name: gpt2-small
+  hook: blocks.7.hook_resid_pre
+  d_in: 768
+  d_sae: 24576
+  config_filename: cfg.json
+  weights_filename: sae_weights.safetensors
+  config_sha256: 93d39f5eefeb5c254bf45c871fddc9527619d3626eeb0bd015e5f7330945f88e
+  weights_sha256: 47bfb75008fdd7ebf068044c0c3a212606aaa3f5dc05f1d1a7cffe502002c0b6
+  encoder: relu_centered_by_b_dec
+  direction: unit_normalized_W_dec_row
+
+flow:
+  kind: sdedit_partial_noising
+  integrator: reverse_explicit_euler
+  t_start: [0.10, 0.25, 0.50]
+  nfe: [1, 3, 5]
+  off_distribution_norm: 600.0
+
+noise:
+  namespace: flow_noise_v2
+  identity: [vector, exact_alpha, prompt_id, generation_seed, token_position]
+  independent_of: [method, t_start, nfe, batch_order, hook_call_grouping]
+  draw_at_guarded_positions: true
+
+generation:
+  source_protocol_sha256: 0fe8b88e4ac4ea480067d818a3faaed44cb38a310f5897183bcd003006423a81
+  prompts:
+    - "The first thing to say is that"
+    - "Yesterday afternoon, I went to"
+    - "In my opinion, the most important"
+    - "She looked around the room and"
+    - "It started when someone decided to"
+    - "According to a recent report, the"
+    - "Here is what happened next:"
+    - "He had never seen anything quite like"
+    - "One question that keeps coming up is"
+    - "Over the past few years, people have"
+  decoding:
+    max_new_tokens: 48
+    temperature: 1.0
+    top_p: 0.95
+    top_k: 0
+    freq_penalty: 0.0
+  seeds: [0, 1, 2]
+  activation_norm_mean: 88.76
+  alpha_hat: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.85, 1.0]
+  alpha_hat_stress: [1.5, 2.0]
+
+vectors:
+  - name: allegations
+    feature: 20428
+    rank: 0
+    split: dev
+    desc: "references to allegations"
+    lexicon: [allegation, allegations, alleged, allegedly, accuse, accused, accusation,
+              accusations, claim, claims, claimed, denied, denies, denial, misconduct,
+              wrongdoing, complaint, complaints, investigat*, lawsuit, lawsuits, charge,
+              charges, accuser, victim, victims, testimony, witness, witnesses, scandal]
+  - name: dungeon
+    feature: 11356
+    rank: 9
+    split: dev
+    desc: 'mentions of "dungeon" and related terms in various contexts'
+    lexicon: [dungeon, dungeons, dragon, dragons, quest, quests, loot, monster, monsters,
+              castle, crypt, cellar, torch, adventurer*, goblin*, orc, orcs, wizard,
+              sorcer*, spell, spells, sword, shield, armor, armour, trap, traps,
+              labyrinth, catacomb*, chamber, tunnel, tunnels, raid, raids]
+  - name: locations_addresses
+    feature: 18660
+    rank: 17
+    split: dev
+    desc: "specific locations and addresses"
+    lexicon: [address, addresses, street, streets, avenue, boulevard, road, roads,
+              drive, lane, court, place, suite, apartment, floor, building, buildings,
+              block, corner, downtown, district, neighbourhood, neighborhood, located,
+              location, locations, city, town, village, postal, zip, premises, site]
+  - name: illicit_drugs
+    feature: 22059
+    rank: 19
+    split: dev
+    desc: "mentions of illicit drugs, particularly heroin, and their effects"
+    lexicon: [heroin, cocaine, opioid, opioids, opiate*, fentanyl, methamphetamine,
+              meth, morphine, narcotic*, drug, drugs, overdose, overdoses, addict,
+              addicts, addiction, addictive, needle, needles, inject*, syringe, dealer,
+              dealers, traffick*, withdrawal, rehab, detox, substance, substances, high,
+              dose, doses]
+  - name: law_enforcement_officials
+    feature: 4513
+    rank: 22
+    split: dev
+    desc: "mentions of law enforcement officials, particularly sheriffs"
+    lexicon: [sheriff, sheriffs, deputy, deputies, police, polic*, officer, officers,
+              detective, detectives, trooper, troopers, marshal, marshals, constable,
+              patrol, patrols, precinct, department, badge, uniform, arrest, arrests,
+              arrested, custody, warrant, warrants, dispatch, cruiser, squad]
+  - name: same_sex_marriage
+    feature: 18752
+    rank: 24
+    split: dev
+    desc: "references to same-sex marriage and related discussions"
+    lexicon: [marriage, marriages, married, marry, wedding, weddings, spouse, spouses,
+              couple, couples, gay, lesbian, homosexual, bisexual, lgbt, lgbtq, queer,
+              equality, union, unions, civil, partnership, ceremony, vows, legalize,
+              legalise, legalized, ban, amendment, ruling, court]
+  - name: borders
+    feature: 15946
+    rank: 27
+    split: dev
+    desc: "references to borders and border-related topics"
+    lexicon: [border, borders, borderland, frontier, frontiers, boundary, boundaries,
+              crossing, crossings, checkpoint, checkpoints, customs, immigration,
+              immigrant, immigrants, migrant, migrants, wall, fence, patrol, smuggl*,
+              visa, visas, passport, passports, deport*, asylum, territory, territorial,
+              perimeter]
+  - name: sports_awards
+    feature: 14241
+    rank: 32
+    split: dev
+    desc: "references to award-winning players in sports"
+    lexicon: [award, awards, awarded, trophy, trophies, medal, medals, champion,
+              champions, championship, mvp, honour, honours, honor, honors, player,
+              players, athlete, athletes, rookie, veteran, allstar, season, seasons,
+              league, team, teams, record, records, title, titles, winner, winners]
+
+smoke:
+  purpose: operational_only_no_scientific_selection
+  vector: allegations
+  prompt_id: 0
+  generation_seed: 0
+  alpha_hat: 0.1
+  t_start: 0.10
+  nfe: 1
+  max_new_tokens: 2

@@ -1,0 +1,32 @@
+version: 1
+status: clean_reimplementation
+
+# Capacity-only variant of configs/flow_core_v1.yaml. The architecture family,
+# flow objective, time convention, standardization, and sampler are unchanged;
+# only the internal width differs, with an explicit 768-wide activation
+# input/output boundary. This is not a new method.
+architecture:
+  kind: tokenwise_time_conditioned_swiglu
+  activation_dim: 768
+  d_model: 1536
+  d_mlp: 3072
+  n_blocks: 3
+  norm: layernorm
+  time_conditioning: multiplicative_gate
+  n_params_expected: 60407808
+
+time_embedding:
+  kind: continuous_sinusoidal
+  dim: 256
+  hidden: 768
+  out_dim: 1536
+  max_period: 10000.0
+
+objective:
+  kind: flow_matching
+  coordinates: standardized_activation
+  path: linear_interpolation
+  data_time: 0.0
+  noise_time: 1.0
+  target: eps_minus_x0
+  loss: mean_squared_error
