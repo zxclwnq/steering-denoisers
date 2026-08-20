@@ -1,0 +1,150 @@
+version: 1
+experiment_id: flow_train_steering_denoiser_16m_fw32m_v1
+experiment_class: post_stop_method_development
+
+# Post-stop experiment B of docs/POST_STOP_PROTOCOL_2026-08-19.md, added on
+# 2026-08-19 after the branch stop rule had already fired. It is post-hoc and not
+# preregistered. It does not reopen any closed branch; it is a new,
+# differently-trained model with its own result directory.
+#
+# Trained on an RTX 3090, torch 2.6.0+cu124, after a full test run on the same
+# machine. Only the `status` field changed when the run was authorized; `status`
+# lives in `raw` and is excluded from the config fingerprint, so the scientific
+# fingerprint is unchanged.
+status: authorized
+
+# Unconditional narrow ~16M trunk. The denoiser sees only the corrupted
+# activation: no direction, no strength, no time. Its parameter count is
+# 15,360,000 -- the flow trunk minus the time embedding it does not need.
+flow_core_config: configs/flow_core_v1.yaml
+
+experiment_card:
+  hypothesis: >-
+    Every prior in this programme was trained to invert Gaussian corruption and
+    then asked to repair a steering edit. Cold Diffusion and SPAR suggest
+    training the restoration model on the degradation it will actually face:
+    z = h + delta v, target h. This config trains that denoiser. Whether its
+    output is genuine repair or merely removal of the steering is tested
+    separately (experiment B evaluation) and is explicitly NOT assumed here.
+  independent_variable: corruption family (steering displacement instead of Gaussian noise)
+  controlled_variables:
+    - corpus, tokenizer, model revision, hook, and context length
+    - architecture family, width, block count
+    - standardization statistics and eps
+    - optimizer, learning rate, weight decay, warmup, schedule horizon, batch size, dtype, grad clip
+    - training-only direction pool and its provenance digest
+    - training budget (250000 steps at batch 1024), identical to experiments A and the closed branch
+  uncontrolled_variables:
+    - >-
+      parameter count: 15,360,000 against the flow priors' 16,147,200 base
+      (+395,264 conditioning). The denoiser has no time embedding to carry, so it
+      is ~5% smaller. This is a property of the architecture family, not a tuned
+      choice, and it makes the denoiser the SMALLER model -- it cannot explain a
+      win in its favour.
+    - >-
+      noise_seed. There is no paired-stream claim here: the steering sampler
+      consumes its generator differently from every flow sampler, so no
+      objective-only causal comparison against a flow prior is available or
+      claimed.
+  baseline: >-
+    NOT the flow priors, and NOT additive steering at equal nominal alpha. The
+    decisive baselines are additive steering and scalar shrinkage at EQUAL
+    REALISED CONCEPT STRENGTH alpha_eff = <h' - h_clean, v>, plus the frozen
+    hard-clamp result. See docs/POST_STOP_PROTOCOL_2026-08-19.md section B.5.
+  expected_failure_mode: >-
+    the model learns to invert the steering rather than to repair it, so its
+    apparent quality gain disappears once matched on realised concept strength
+  success_criterion: >-
+    complete finite run with checkpoints selected only by validation denoising
+    MSE; the matched-strength verdict is evaluated afterwards and is not part of
+    this config
+
+data:
+  dataset: resid7_fw_train_32000k_v1
+  split: train
+  repository: HuggingFaceFW/fineweb
+  repository_config: sample-10BT
+  repository_revision: 9bb295ddab0e05d785b879661af7260fed5140fc
+  tokenizer: gpt2
+  per_seq: 127
+  val_fraction: 0.05
+  split_seed: 20260807
+  split_fingerprint: 02dad171587ee40f
+  bos_dropped: true
+  steering_vectors_used: false
+
+normalization:
+  statistics_from: train_split_only
+  eps: 1.0e-5
+  accumulation_dtype: float64
+
+training:
+  seed: 0
+  noise_seed: 20260819
+  steps: 250000
+  batch_size: 1024
+  optimizer: adamw
+  lr: 3.0e-4
+  weight_decay: 0.01
+  schedule: cosine
+  warmup_steps: 500
+  grad_clip: 1.0
+  dtype: float32
+  eval_every: 500
+
+# NOT a `conditioning` section: the denoiser is unconditional and has no
+# condition encoder. It needs the pool only to draw the direction it is corrupted
+# along, which it is never told.
+steering_corruption:
+  direction_pool: data/direction_pools/training_only_rank256_v1.pt
+  direction_pool_split: training_only
+  steering_vectors_used: false
+  # Restated from interp.steering_denoiser.STEERING_CORRUPTION_SPEC, which the
+  # loader verifies this section against. Frozen 2026-08-19 from the already
+  # published hard-clamp displacements of results/tangent_t2_v1/raw_rows.npz:
+  # natural coordinate sd 7.52, clamp displacement sd 6.18, |delta| p99 21.8,
+  # observed max 32.0. No DEV steering vector was involved in choosing it, and it
+  # is not tuned after any result is seen.
+  spec_version: steering_corruption_v1
+  distribution: uniform_symmetric
+  delta_max: 32.0
+  lambda_grid: [0.25, 0.50, 0.75, 1.00]
+
+flow_objective:
+  # z = h + delta v (raw space), target = h; D(z) = z + f(z) in standardized space.
+  type: steering_corruption_denoising
+  # Not applicable: the denoiser predicts a residual, not a velocity, so there is
+  # no tangent projection. The loader rejects `true` here.
+  output_projection: false
+
+compute_budget:
+  unique_activation_tokens: 32000063
+  unique_training_tokens: 30400117
+  total_activation_presentations: 256000000
+  approximate_dataset_passes: 8.42
+  optimizer_steps: 250000
+  expected_runtime_minutes: [30, 45]
+
+validation:
+  seed: 0
+  batches: 20
+  # Read as fractions of delta_max, not as flow time: the denoiser has no time,
+  # so its bins measure reconstruction error against corruption MAGNITUDE
+  # (|delta| = bin * 32.0). Concept-independent in exactly the same way.
+  t_bins: [0.0, 0.10, 0.25, 0.50, 0.75, 1.0]
+  selection_metric: val_flow_mse
+  selection_mode: min
+  in_run_note: >-
+    Checkpoint selection is concept-independent: denoising MSE on this artifact's
+    own held-back 5% document split, with corrupting directions drawn only from
+    the training-only pool. No DEV or held-out steering vector, and no steering
+    quality of any kind, may influence checkpoint selection.
+
+checkpoints:
+  save_steps: [25000, 75000, 125000, 175000, 250000]
+  keep: [best, last, configured_steps]
+  include_optimizer_state: true
+
+protected_data:
+  held_out: forbidden
+  dev: forbidden

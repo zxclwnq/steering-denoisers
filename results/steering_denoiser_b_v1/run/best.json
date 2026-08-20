@@ -1,0 +1,6 @@
+{
+  "selection_metric": "val_flow_mse",
+  "selection_mode": "min",
+  "value": 0.028877296019345522,
+  "checkpoint": "best_step_250000.pt"
+}
