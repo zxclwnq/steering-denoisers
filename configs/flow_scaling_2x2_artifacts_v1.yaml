@@ -1,0 +1,88 @@
+version: 1
+status: template_to_be_filled_after_collection_and_training
+experiment_id: flow_scaling_2x2_v1
+
+# Mechanical artifact identity for the 2x2. These values cannot exist when the
+# protocol is frozen, so they live outside configs/flow_scaling_2x2_v1.yaml and are
+# recorded, not preregistered. scripts/evaluate_scaling_arm.py re-derives and
+# re-verifies every hash from the on-disk validation report and run metadata, so
+# this file is a human-readable index, not a trusted input.
+#
+# Fill each null after the corresponding step completes. Never edit a filled value.
+
+activation_artifacts:
+  resid7_fw_val_1024k_v1:
+    path: /workspace/data/fineweb_activations/resid7_fw_val_1024k_v1.npy
+    token_cache: null
+    token_cache_sha256: null
+    array_sha256: null
+    metadata_sha256: null
+    statistics_sha256: null
+    validation_status: null
+    collected_utc: null
+  resid7_fw_train_4000k_v1:
+    path: /workspace/data/fineweb_activations/resid7_fw_train_4000k_v1.npy
+    token_cache: null
+    token_cache_sha256: null
+    array_sha256: null
+    metadata_sha256: null
+    statistics_sha256: null
+    validation_status: null
+    collected_utc: null
+  resid7_fw_train_32000k_v1:
+    path: /workspace/data/fineweb_activations/resid7_fw_train_32000k_v1.npy
+    token_cache: null
+    token_cache_sha256: null
+    array_sha256: null
+    metadata_sha256: null
+    statistics_sha256: null
+    validation_status: null
+    collected_utc: null
+
+runs:
+  narrow16m_fw4m:
+    training_experiment_id: flow_scaling_narrow16m_fw4m_v1
+    run_dir: /workspace/checkpoints/flow_scaling_narrow16m_fw4m_v1
+    best_checkpoint: null
+    best_checkpoint_sha256: null
+    run_meta_sha256: null
+    best_pointer_sha256: null
+    best_val_flow_mse: null
+    wall_clock_seconds: null
+    report: /workspace/results/flow_scaling_2x2_v1/narrow16m_fw4m.json
+  narrow16m_fw32m:
+    training_experiment_id: flow_scaling_narrow16m_fw32m_v1
+    run_dir: /workspace/checkpoints/flow_scaling_narrow16m_fw32m_v1
+    best_checkpoint: null
+    best_checkpoint_sha256: null
+    run_meta_sha256: null
+    best_pointer_sha256: null
+    best_val_flow_mse: null
+    wall_clock_seconds: null
+    report: /workspace/results/flow_scaling_2x2_v1/narrow16m_fw32m.json
+  wide60m_fw4m:
+    training_experiment_id: flow_scaling_wide60m_fw4m_v1
+    run_dir: /workspace/checkpoints/flow_scaling_wide60m_fw4m_v1
+    best_checkpoint: null
+    best_checkpoint_sha256: null
+    run_meta_sha256: null
+    best_pointer_sha256: null
+    best_val_flow_mse: null
+    wall_clock_seconds: null
+    report: /workspace/results/flow_scaling_2x2_v1/wide60m_fw4m.json
+  wide60m_fw32m:
+    training_experiment_id: flow_scaling_wide60m_fw32m_v1
+    run_dir: /workspace/checkpoints/flow_scaling_wide60m_fw32m_v1
+    best_checkpoint: null
+    best_checkpoint_sha256: null
+    run_meta_sha256: null
+    best_pointer_sha256: null
+    best_val_flow_mse: null
+    wall_clock_seconds: null
+    report: /workspace/results/flow_scaling_2x2_v1/wide60m_fw32m.json
+
+smoke:
+  end_to_end:
+    receipt: /workspace/results/flow_scaling_smoke_v1.json
+    status: complete
+    research_status: NOT_EVALUATED

@@ -1,0 +1,45 @@
+=== flow_scaling_2x2_v2 morning summary, 2026-08-14T02:17:43+00:00 ===
+
+--- driver stages ---
+=== 2026-08-13T22:00:52+00:00 TRAIN narrow16m_fw4m ===
+=== 2026-08-13T22:37:09+00:00 EVALUATE narrow16m_fw4m ===
+--- disk after narrow16m_fw4m ---
+=== 2026-08-13T22:37:44+00:00 TRAIN narrow16m_fw32m ===
+=== 2026-08-13T23:17:36+00:00 EVALUATE narrow16m_fw32m ===
+--- disk after narrow16m_fw32m ---
+=== 2026-08-13T23:18:11+00:00 TRAIN wide60m_fw4m ===
+=== 2026-08-14T00:45:05+00:00 EVALUATE wide60m_fw4m ===
+--- disk after wide60m_fw4m ---
+=== 2026-08-14T00:45:43+00:00 TRAIN wide60m_fw32m ===
+=== 2026-08-14T02:16:13+00:00 EVALUATE wide60m_fw32m ===
+--- disk after wide60m_fw32m ---
+=== 2026-08-14T02:16:51+00:00 ALL ARMS COMPLETE ===
+
+--- arm reports ---
+total 544
+drwxr-xr-x 2 research research    112 Aug 14 02:16 .
+drwxr-xr-x 1 research research     60 Aug 13 22:00 ..
+-rw------- 1 research research 137007 Aug 13 23:18 narrow16m_fw32m.json
+-rw------- 1 research research 136924 Aug 13 22:37 narrow16m_fw4m.json
+-rw------- 1 research research 137276 Aug 14 02:16 wide60m_fw32m.json
+-rw------- 1 research research 137136 Aug 14 00:45 wide60m_fw4m.json
+
+--- run dirs ---
+1.3G	/workspace/checkpoints/flow_scaling_narrow16m_fw32m_v2
+1.3G	/workspace/checkpoints/flow_scaling_narrow16m_fw4m_v2
+4.8G	/workspace/checkpoints/flow_scaling_wide60m_fw32m_v2
+4.8G	/workspace/checkpoints/flow_scaling_wide60m_fw4m_v2
+overlay             600G   89G      512G  15% /
+
+--- selection stage ---
+arm                     params      unique   primary dLM  val_flow_mse
+narrow16m_fw4m      16,147,200   4,000,119      0.307494      0.981007
+narrow16m_fw32m     16,147,200  32,000,063      0.304079      0.980932
+wide60m_fw4m        60,407,808   4,000,119      0.224689      0.839846
+wide60m_fw32m       60,407,808  32,000,063      0.222219      0.838363
+
+leader: wide60m_fw32m   tied: ['wide60m_fw32m', 'wide60m_fw4m']
+selected: wide60m_fw32m (decided by lower validation flow MSE on resid7_fw_val_1024k_v1)
+wrote immutable selection report: /workspace/results/flow_scaling_2x2_v2/selection.json
+exit=0
+=== done 2026-08-14T02:17:47+00:00 ===
