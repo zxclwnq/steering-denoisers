@@ -1,0 +1,75 @@
+version: 1
+experiment_id: clean_flow_100k_v1
+experiment_class: dev_method_development
+status: authorized
+flow_core_config: configs/flow_core_v1.yaml
+
+experiment_card:
+  hypothesis: >-
+    Extending the clean flow matcher to a 100000-step cosine schedule improves
+    concept-independent validation flow loss and small-time velocity accuracy enough
+    to justify a new Phase-A functional reconstruction evaluation.
+  independent_variable: total training steps and the corresponding cosine-schedule horizon
+  controlled_variables:
+    - activation dataset and document-level split
+    - train-only normalization
+    - flow path and velocity target
+    - model architecture
+    - optimizer, base learning rate, weight decay, warmup, batch size, and seeds
+    - validation sampling and checkpoint-selection metric
+  baseline: clean 40000-step flow budget, retained only as historical evidence
+  metrics:
+    - val_flow_mse
+    - val_flow_mse_by_bin
+    - zero_predictor_mse
+    - val_cosine_velocity
+  expected_failure_mode: validation loss plateaus or worsens despite the longer schedule
+  success_criterion: complete finite run with checkpoint selected only by val_flow_mse
+
+data:
+  dataset: resid7_train_4000k_v2
+  split: train
+  repository: Skylion007/openwebtext
+  repository_config: plain_text
+  repository_revision: 79d93d786212f7344586290adb811d4ae6a1762c
+  tokenizer: gpt2
+  per_seq: 127
+  val_fraction: 0.05
+  split_seed: 20260807
+  split_fingerprint: c34aec678a328131
+  bos_dropped: true
+  steering_vectors_used: false
+
+normalization:
+  statistics_from: train_split_only
+  eps: 1.0e-5
+  accumulation_dtype: float64
+
+training:
+  seed: 0
+  noise_seed: 20260812
+  steps: 100000
+  batch_size: 1024
+  optimizer: adamw
+  lr: 3.0e-4
+  weight_decay: 0.01
+  schedule: cosine
+  warmup_steps: 500
+  grad_clip: 1.0
+  dtype: float32
+  eval_every: 500
+
+validation:
+  seed: 0
+  batches: 20
+  t_bins: [0.0, 0.10, 0.25, 0.50, 0.75, 1.0]
+  selection_metric: val_flow_mse
+  selection_mode: min
+
+checkpoints:
+  save_steps: [10000, 20000, 30000, 40000, 60000, 80000, 100000]
+  keep: [best, last, configured_steps]
+  include_optimizer_state: true
+
+protected_data:
+  held_out: forbidden

@@ -1,0 +1,71 @@
+version: 1
+status: frozen
+experiment_id: clean_flow_phase_a_100k_v1
+experiment_class: dev_method_development
+
+checkpoint:
+  path: /workspace/checkpoints/clean_flow_100k_v1_a439b2d7/best_step_099500.pt
+  run_meta_path: /workspace/checkpoints/clean_flow_100k_v1_a439b2d7/meta.json
+  best_pointer_path: /workspace/checkpoints/clean_flow_100k_v1_a439b2d7/best.json
+  sha256: 9d1d3cb66b9eaab1cbc89edab121d5cfa318271d7502e2ce42230432faad30d2
+  run_meta_sha256: 220d63c16a1996be5badd7719916df603ba86981c3ea1b08df93de2f583bed11
+  best_pointer_sha256: 094973b776613903a78778054b042fcfdf1839a9fb277dbe39c9d1291690c975
+  step: 99500
+  training_experiment_id: clean_flow_100k_v1
+  expected_history_entries: 200
+  selection_metric: val_flow_mse
+  selection_mode: min
+
+data:
+  dataset: resid7_train_4000k_v2
+  activation_split: train
+  internal_split: validation_only
+  repository: Skylion007/openwebtext
+  repository_config: plain_text
+  repository_revision: 79d93d786212f7344586290adb811d4ae6a1762c
+  tokenizer: gpt2
+  model: gpt2-small
+  resolved_model_name: gpt2
+  model_revision: 607a30d783dfa663caf39e06633721c8d4cfcd7e
+  hook: blocks.7.hook_resid_pre
+  ctx: 128
+  per_seq: 127
+  val_fraction: 0.05
+  split_seed: 20260807
+  split_fingerprint: c34aec678a328131
+  token_cache_sha256: 94a7302574048fe40362cc6fc719747a45562c9a8a0379cbeb5503fdd15e875d
+  artifact_sha256:
+    array: 95a92ff058df0f8b31a0a85c026be79e927c6b74cb90d5ef88381a9c97ca5d91
+    metadata: 82c7287c8852077607c705f378fcbc73ae237c49d29e989639cc18cdfc827d60
+    statistics: c5cd4290f6b633b1d335d5a1e5007e8ce6bdb72cfef76de6022f8fbd7776ec26
+
+evaluation:
+  n_sequences: 256
+  sequence_selection: first_sorted_internal_validation_sequences
+  lm_batch_size: 8
+  noise_seed: 0
+  bootstrap_seed: 20260813
+  bootstrap_resamples: 10000
+  bootstrap_confidence: 0.95
+  t_start: [0.10, 0.25, 0.50]
+  nfe: [1, 3, 5]
+  skip_bos: true
+  identity_nfe: 1
+
+gate:
+  primary_t_start: 0.50
+  primary_nfe: 1
+  paired_effect: reconstructed_delta_lm_minus_corrupted_delta_lm
+  unit: validation_sequence
+  require_mean_below_zero: true
+  require_ci_upper_below_zero: true
+  require_positive_corruption_each_t_start: true
+  require_exact_identity_delta_zero: true
+  require_zero_identity_flow_evaluations: true
+  require_finite_outputs_and_geometry: true
+  diagnostic_cells_cannot_select: true
+
+protected_data:
+  steering_vectors: forbidden
+  dev_directions: forbidden
+  held_out: forbidden

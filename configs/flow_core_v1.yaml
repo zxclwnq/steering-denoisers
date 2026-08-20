@@ -1,0 +1,27 @@
+version: 1
+status: clean_reimplementation
+
+architecture:
+  kind: tokenwise_time_conditioned_swiglu
+  d_model: 768
+  d_mlp: 1536
+  n_blocks: 3
+  norm: layernorm
+  time_conditioning: multiplicative_gate
+  n_params_expected: 16147200
+
+time_embedding:
+  kind: continuous_sinusoidal
+  dim: 256
+  hidden: 768
+  out_dim: 768
+  max_period: 10000.0
+
+objective:
+  kind: flow_matching
+  coordinates: standardized_activation
+  path: linear_interpolation
+  data_time: 0.0
+  noise_time: 1.0
+  target: eps_minus_x0
+  loss: mean_squared_error
