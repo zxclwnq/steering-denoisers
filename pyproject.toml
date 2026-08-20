@@ -1,0 +1,51 @@
+[project]
+name = "clean-activation-flow"
+version = "0.1.0"
+description = "Clean-room flow matching for GPT-2 residual activations"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    # 5.0.1 aborts in PyGILState_Release after a streaming iterator finishes on
+    # the worker; 3.1.0 provides the same pinned-revision API and exits cleanly.
+    "datasets==3.1.0",
+    "numpy>=2.0",
+    # Last official PyTorch line with CUDA 12.4 wheels; the RTX 4090 worker's
+    # NVIDIA 550 driver cannot initialize the CUDA 13 runtime in newer wheels.
+    "torch==2.6.0",
+    "tqdm>=4.67",
+    "transformer-lens>=2.15",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3",
+    "ruff>=0.9",
+]
+
+[build-system]
+requires = ["uv_build>=0.9,<0.10"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-root = "src"
+module-name = "interp"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests", "scripts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+# Installed by a plain `uv sync`, so that `make test`, `make lint` and
+# `make report` all work straight after cloning.
+[dependency-groups]
+dev = [
+    "matplotlib>=3.11.1",
+    "pytest>=8.3",
+    "ruff>=0.9",
+]

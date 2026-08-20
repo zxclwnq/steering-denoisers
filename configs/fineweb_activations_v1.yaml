@@ -1,0 +1,114 @@
+version: 1
+status: frozen_before_collection
+experiment_class: concept_independent_activation_data
+
+# Reproducible FineWeb activation-data manifest for the cheap-scaling experiment.
+# The corpus pin here must equal interp.data.FINEWEB; tests enforce that.
+corpus:
+  key: fineweb
+  repository: HuggingFaceFW/fineweb
+  repository_config: sample-10BT
+  repository_revision: 9bb295ddab0e05d785b879661af7260fed5140fc
+  streaming: true
+  document_order: upstream_stream_order
+  concept_filtering: none
+  steering_metadata_used: false
+
+model:
+  name: gpt2-small
+  resolved_name: gpt2
+  revision: 607a30d783dfa663caf39e06633721c8d4cfcd7e
+  tokenizer: gpt2
+  hook: blocks.7.hook_resid_pre
+  activation_dim: 768
+
+tokenization:
+  ctx: 128
+  prepend_bos: true
+  bos_per_sequence: 1
+  add_special_tokens: false
+  packing: one_128_token_window_per_document
+  min_document_text_tokens: 127
+  short_documents: skipped_not_padded
+  padding_positions: 0
+  bos_positions_dropped_per_sequence: 1
+  activations_per_sequence: 127
+  document_boundaries: one_document_per_sequence
+
+storage:
+  compute_dtype: float32
+  storage_dtype: float16
+  statistics_dtype: float64
+  statistics_from: per_artifact_train_split_only
+  provenance: whole_file_sha256_of_array_metadata_statistics
+  provenance_note: >-
+    Whole-file SHA256 is retained for the 49 GB artifact rather than a chunk
+    manifest. Measured hashing cost on the worker is a few minutes and the
+    validator already performs a full float64 rescan, so a second scheme would
+    add provenance surface without adding evidence.
+
+# Document ranges are disjoint. Every training artifact is a prefix of the same
+# training stream, so resid7_fw_train_4000k_v1 is a strict subset of
+# resid7_fw_train_32000k_v1 and no activation is repeated inside an artifact.
+splits:
+  val:
+    document_range: [0, 40000]
+    purpose: frozen_concept_independent_validation
+  train:
+    document_range: [100000, 20000000]
+    purpose: flow_training_only
+
+artifacts:
+  - name: resid7_fw_val_1024k_v1
+    split: val
+    n_tokens_requested: 1024128
+    n_seqs: 8064
+    n_activations: 1024128
+    shape: [1024128, 768]
+    bytes_float16: 1573060608
+    split_seed: 20260807
+    val_fraction: 0.05
+    split_fingerprint: 5725541eaecf437c
+    internal_validation_sequences: 403
+    role: frozen validation set shared by every 2x2 arm
+  - name: resid7_fw_train_4000k_v1
+    split: train
+    n_tokens_requested: 4000119
+    n_seqs: 31497
+    n_activations: 4000119
+    shape: [4000119, 768]
+    bytes_float16: 6144182784
+    split_seed: 20260807
+    val_fraction: 0.05
+    split_fingerprint: c34aec678a328131
+    role: small unique-data arm; token count matched to the historical OpenWebText 4M artifact
+  - name: resid7_fw_train_32000k_v1
+    split: train
+    n_tokens_requested: 32000063
+    n_seqs: 251969
+    n_activations: 32000063
+    shape: [32000063, 768]
+    bytes_float16: 49152096768
+    split_seed: 20260807
+    val_fraction: 0.05
+    split_fingerprint: 02dad171587ee40f
+    role: large unique-data arm; superset of resid7_fw_train_4000k_v1
+
+future_scales_not_collected:
+  - name: resid7_fw_train_128000k_v1
+    n_seqs: 1007875
+    n_activations: 128000125
+    bytes_float16: 196608192000
+    status: not_authorized_not_collected
+
+disk:
+  total_bytes_float16: 56869340160
+  total_gb_float16: 56.87
+  token_cache_bytes: 149263360
+  required_free_gb_with_headroom: 70
+
+protected_data:
+  dev_directions: forbidden
+  held_out: forbidden
+  steering_vectors: forbidden
+  llm_judges: forbidden

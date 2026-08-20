@@ -1,0 +1,42 @@
+# Protected evaluation data. Held-out steering directions were never evaluated in
+# this project and their identities are not published.
+configs/protected/
+
+# Python environments and caches
+.venv/
+.venv.incomplete*/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Model weights and bulk experimental artifacts are distributed through
+# HuggingFace rather than git; see REPRODUCIBILITY.md. The small machine-readable
+# result files needed to rebuild the report are tracked explicitly.
+checkpoints/
+hf_release/
+data/
+results/
+*.pt
+*.npz
+*.npy
+*.safetensors
+
+# LaTeX build products
+report/*.aux
+report/*.log
+report/*.out
+report/*.toc
+report/*.bbl
+report/*.blg
+report/*.fls
+report/*.fdb_latexmk
+report/*.synctex.gz
+
+# Editor and OS
+.claude/
+.idea/
+.vscode/
+*.swp
+.DS_Store
