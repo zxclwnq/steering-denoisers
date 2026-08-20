@@ -1,0 +1,1076 @@
+{
+  "analysis": "curvature_controls_v1",
+  "question": "do the controls license reading the curvature number as a statement about concept trajectories, and does it license the local-tangent reading of a fixed v?",
+  "class": "post_stop_method_development",
+  "generated_utc": "2026-08-20T00:14:10.531432+00:00",
+  "source_revision": "snapshot-sha256:59b7ddaa69f263c363a660661946bbfa3fa903e2bb3ff710ad9cc9079c82f8b9",
+  "debug_mode": false,
+  "source_result": "results/curvature_c_v1_complete",
+  "source_experiment": "concept_curvature_v1",
+  "source_generated_utc": "2026-08-20T00:13:39.344329+00:00",
+  "source_direction_selection": {
+    "mode": "frozen_seeded_draw",
+    "preregistered": true,
+    "direction_seed": 20260913
+  },
+  "source_verdict": {
+    "gate": "C",
+    "margin": 0.02,
+    "mean_cos_consecutive_secants": 0.7144576232841937,
+    "mean_split_half_pair_ceiling": 0.9949695783910412,
+    "mean_shortfall_below_ceiling": 0.2805119551068474,
+    "rungs_used": 4,
+    "shortfall_interval": {
+      "mean": 0.28051195510684734,
+      "ci_lower": 0.24606788816689917,
+      "ci_upper": 0.3109937593235192,
+      "confidence": 0.95,
+      "n_directions": 32,
+      "n_resamples": 1000,
+      "fraction_directions_positive": 1.0,
+      "cluster": "direction"
+    },
+    "verdict": "CURVATURE_DETECTED",
+    "interpretation": "the local direction of the natural concept trajectory rotates with concept strength by more than estimation noise explains; a fixed v is a local tangent, not a global axis",
+    "random_direction_reference": {
+      "mean_cos_consecutive_secants": 0.7969047152141404,
+      "mean_orthogonal_drift": 0.9240737601762786,
+      "note": "random unit directions are not concept directions; this is a reference for what the statistics look like on an arbitrary axis, not a null hypothesis test"
+    }
+  },
+  "validation_artifact": {
+    "name": "resid7_fw_val_1024k_v1",
+    "artifact_sha256": {
+      "array": "c3c67180ca62c85862f515322d99fbc85f7659880a9f5fdfd895bcd884e1cc9a",
+      "metadata": "f395d69708264ab58c6de00ddb043f76c12490d9dd7595195ec97b5f028396af",
+      "statistics": "643ece1cb21d8cb29f0743db1efc2b62e900c1879ff1c6e0139ef180fb0fe55c"
+    },
+    "token_cache_file": "val_8064x128_ec74f9185b620b6a.npy",
+    "token_cache_sha256": "715b1cc940c321487c1f8242b6880b438547ad4dbbf9b899112367f5275983aa",
+    "split_fingerprint": "5725541eaecf437c",
+    "split": "val",
+    "hook": "blocks.7.hook_resid_pre",
+    "model": "gpt2-small",
+    "resolved_model_name": "gpt2",
+    "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "tokenizer": "gpt2",
+    "ctx": 128,
+    "per_seq": 127,
+    "d_model": 768,
+    "n_seqs": 8064,
+    "n_activations": 1024128,
+    "bos_dropped": true,
+    "dataset_repository": "HuggingFaceFW/fineweb",
+    "dataset_config": "sample-10BT",
+    "dataset_revision": "9bb295ddab0e05d785b879661af7260fed5140fc",
+    "validation_report_status": "VALID"
+  },
+  "direction_pool": {
+    "split": "training_only",
+    "source": "sae:gpt2-small-res-jb/blocks.7.hook_resid_pre@57d08a4fd333fbf18caf3fbea63ceeb88e2f50d9 weights_sha256:47bfb75008fdd7ebf068044c0c3a212606aaa3f5dc05f1d1a7cffe502002c0b6 direction:unit_normalized_W_dec_row universe:23610/24576 labeller:gpt-4o-mini firing_rate:[0.0001,0.02] explanations_sha256:7b2fd33704260489b65e2091115c6ca6a40f5fc3298cc406ecf428b45fc7580f feature_stats_sha256:c27629b4c51b43e2f2906459400e22b9c7742f1902d577132f6671ba2c9f0317 selection_rule_sha256:455ff5bae701d20ddf1d88fc90191c81d7dca1b328c893835a39ab087b262b5e",
+    "selection": "blake2b_priority_rank/interp.selection.stable_order@v2",
+    "selection_seed": 20260807,
+    "min_rank": 256,
+    "excluded_splits": [
+      "dev",
+      "held_out"
+    ],
+    "n_directions": 23354,
+    "digest": "45241c49814abe71ed7106e1a0fcbbe7d8aad40b215621674ec72ee7356d7a2c",
+    "observed_min_rank": 256,
+    "observed_max_rank": 23609
+  },
+  "spec": {
+    "version": "concept_curvature_v1",
+    "cut_quantiles": [
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      0.9
+    ],
+    "n_directions": 32,
+    "direction_seed": 20260913,
+    "n_rows": 262144,
+    "row_seed": 20260914,
+    "n_random_directions": 32,
+    "random_direction_seed": 20260915,
+    "shuffle_seed": 20260916,
+    "split_half_seed": 20260917,
+    "split_half_repeats": 8,
+    "bootstrap_seed": 20260918,
+    "bootstrap_resamples": 1000,
+    "confidence": 0.95,
+    "min_bin_rows": 256
+  },
+  "c1_alignment_with_fixed_v": {
+    "statistic": "cos(d_k, v): alignment of the local secant with the fixed direction",
+    "by_rung": [
+      {
+        "rung": 0,
+        "mean": 0.2937923011111191,
+        "ci_lower": 0.2693816352629284,
+        "ci_upper": 0.32541302661849314,
+        "confidence": 0.95,
+        "n_directions": 32,
+        "n_resamples": 1000,
+        "fraction_directions_positive": 1.0,
+        "cluster": "direction",
+        "bins": "bin0(-inf..p10)->bin1"
+      },
+      {
+        "rung": 1,
+        "mean": 0.34579814581704904,
+        "ci_lower": 0.3245324376802266,
+        "ci_upper": 0.3727844272674115,
+        "confidence": 0.95,
+        "n_directions": 32,
+        "n_resamples": 1000,
+        "fraction_directions_positive": 1.0,
+        "cluster": "direction",
+        "bins": "bin1(p10..p25)->bin2"
+      },
+      {
+        "rung": 2,
+        "mean": 0.3587365657556806,
+        "ci_lower": 0.3348851120198639,
+        "ci_upper": 0.38780417737831907,
+        "confidence": 0.95,
+        "n_directions": 32,
+        "n_resamples": 1000,
+        "fraction_directions_positive": 1.0,
+        "cluster": "direction",
+        "bins": "bin2(p25..p50)->bin3"
+      },
+      {
+        "rung": 3,
+        "mean": 0.37462857242533476,
+        "ci_lower": 0.34979425536388287,
+        "ci_upper": 0.40053124707203597,
+        "confidence": 0.95,
+        "n_directions": 32,
+        "n_resamples": 1000,
+        "fraction_directions_positive": 1.0,
+        "cluster": "direction",
+        "bins": "bin3(p50..p75)->bin4"
+      },
+      {
+        "rung": 4,
+        "mean": 0.5031480931133303,
+        "ci_lower": 0.4799534378787687,
+        "ci_upper": 0.5252311693886821,
+        "confidence": 0.95,
+        "n_directions": 32,
+        "n_resamples": 1000,
+        "fraction_directions_positive": 1.0,
+        "cluster": "direction",
+        "bins": "bin4(p75..p90)->bin5"
+      }
+    ],
+    "central_secant": 2,
+    "upper_tail_minus_central": {
+      "mean": 0.14441152735764962,
+      "ci_lower": 0.10684846403156023,
+      "ci_upper": 0.17962248729205935,
+      "confidence": 0.95,
+      "n_directions": 32,
+      "n_resamples": 1000,
+      "fraction_directions_positive": 0.90625,
+      "cluster": "direction"
+    },
+    "lower_tail_minus_central": {
+      "mean": -0.06494426464456152,
+      "ci_lower": -0.08504592875715193,
+      "ci_upper": -0.04218840633517372,
+      "confidence": 0.95,
+      "n_directions": 32,
+      "n_resamples": 1000,
+      "fraction_directions_positive": 0.1875,
+      "cluster": "direction"
+    },
+    "alignment_falls_away_from_the_centre": false,
+    "local_tangent_reading_supported": false,
+    "interpretation": "alignment does NOT peak at the natural centre and fall away, so these data do not support calling v a local tangent; the fixed direction captures only part of the local motion at every rung"
+  },
+  "c2_random_direction_control": {
+    "available": true,
+    "mean_over_rungs": {
+      "cos_consecutive_secants": {
+        "concept": {
+          "mean": 0.7144576232841937,
+          "ci_lower": 0.6838733250977399,
+          "ci_upper": 0.7492136934705866,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        },
+        "random": {
+          "mean": 0.7969047152141404,
+          "ci_lower": 0.7814548336524185,
+          "ci_upper": 0.8132907319654699,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        },
+        "concept_minus_random": {
+          "mean": -0.0824470919299467,
+          "ci_lower": -0.11605835173361843,
+          "ci_upper": -0.04614436812960955,
+          "confidence": 0.95,
+          "excludes_zero": true,
+          "resampling": "independent_direction_clusters_both_sides"
+        }
+      },
+      "cos_secant_direction": {
+        "concept": {
+          "mean": 0.37522073564450276,
+          "ci_lower": 0.35776715512514734,
+          "ci_upper": 0.39681273676945367,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        },
+        "random": {
+          "mean": 0.37786961713101064,
+          "ci_lower": 0.3667007768538451,
+          "ci_upper": 0.3892680202579755,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        },
+        "concept_minus_random": {
+          "mean": -0.0026488814865078814,
+          "ci_lower": -0.024186278411895207,
+          "ci_upper": 0.021378468175555793,
+          "confidence": 0.95,
+          "excludes_zero": false,
+          "resampling": "independent_direction_clusters_both_sides"
+        }
+      },
+      "orthogonal_drift": {
+        "concept": {
+          "mean": 0.920180399326852,
+          "ci_lower": 0.9103408869805144,
+          "ci_upper": 0.9279559341869835,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        },
+        "random": {
+          "mean": 0.9240737601762787,
+          "ci_lower": 0.9192566235794637,
+          "ci_upper": 0.9287598667257432,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        },
+        "concept_minus_random": {
+          "mean": -0.003893360849426708,
+          "ci_lower": -0.015056371456743232,
+          "ci_upper": 0.005896464129612638,
+          "confidence": 0.95,
+          "excludes_zero": false,
+          "resampling": "independent_direction_clusters_both_sides"
+        }
+      },
+      "split_half_pair_ceiling": {
+        "concept": {
+          "mean": 0.994969578391041,
+          "ci_lower": 0.9941405050358545,
+          "ci_upper": 0.9957545769283269,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        },
+        "random": {
+          "mean": 0.9890080467014686,
+          "ci_lower": 0.9879523389274874,
+          "ci_upper": 0.9899881636997733,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        },
+        "concept_minus_random": {
+          "mean": 0.005961531689572475,
+          "ci_lower": 0.004665553125100178,
+          "ci_upper": 0.007309101845570998,
+          "confidence": 0.95,
+          "excludes_zero": true,
+          "resampling": "independent_direction_clusters_both_sides"
+        }
+      },
+      "shortfall_below_ceiling": {
+        "concept": {
+          "mean": 0.28051195510684734,
+          "ci_lower": 0.24606788816689917,
+          "ci_upper": 0.3109937593235192,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        },
+        "random": {
+          "mean": 0.19210333148732806,
+          "ci_lower": 0.1762799052229266,
+          "ci_upper": 0.20712879737578507,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        },
+        "concept_minus_random": {
+          "mean": 0.08840862361951929,
+          "ci_lower": 0.052158009767684615,
+          "ci_upper": 0.1218442518350871,
+          "confidence": 0.95,
+          "excludes_zero": true,
+          "resampling": "independent_direction_clusters_both_sides"
+        }
+      }
+    },
+    "by_rung": {
+      "cos_consecutive_secants": {
+        "concept": [
+          {
+            "rung": 0,
+            "mean": 0.6786611662705591,
+            "ci_lower": 0.6198865712314339,
+            "ci_upper": 0.7351613117026705,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 1,
+            "mean": 0.6888307290681595,
+            "ci_lower": 0.6224821747106214,
+            "ci_upper": 0.7488054961807707,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 2,
+            "mean": 0.8034301575278273,
+            "ci_lower": 0.7677649166063408,
+            "ci_upper": 0.8328660257168968,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 3,
+            "mean": 0.6869084402702289,
+            "ci_lower": 0.6235364933096879,
+            "ci_upper": 0.7382800175649546,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          }
+        ],
+        "random": [
+          {
+            "rung": 0,
+            "mean": 0.7794060776428656,
+            "ci_lower": 0.7495405543846825,
+            "ci_upper": 0.8072190580645592,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 1,
+            "mean": 0.7834460932098108,
+            "ci_lower": 0.7476661317429268,
+            "ci_upper": 0.8175725137729302,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 2,
+            "mean": 0.8375380826943648,
+            "ci_lower": 0.813089115690752,
+            "ci_upper": 0.8612698895893938,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 3,
+            "mean": 0.7872286073095206,
+            "ci_lower": 0.7556828223946714,
+            "ci_upper": 0.8180061062172842,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          }
+        ]
+      },
+      "cos_secant_direction": {
+        "concept": [
+          {
+            "rung": 0,
+            "mean": 0.2937923011111191,
+            "ci_lower": 0.2693816352629284,
+            "ci_upper": 0.32541302661849314,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 1,
+            "mean": 0.34579814581704904,
+            "ci_lower": 0.3245324376802266,
+            "ci_upper": 0.3727844272674115,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 2,
+            "mean": 0.3587365657556806,
+            "ci_lower": 0.3348851120198639,
+            "ci_upper": 0.38780417737831907,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 3,
+            "mean": 0.37462857242533476,
+            "ci_lower": 0.34979425536388287,
+            "ci_upper": 0.40053124707203597,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 4,
+            "mean": 0.5031480931133303,
+            "ci_lower": 0.4799534378787687,
+            "ci_upper": 0.5252311693886821,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          }
+        ],
+        "random": [
+          {
+            "rung": 0,
+            "mean": 0.34236443602771904,
+            "ci_lower": 0.3259210059612712,
+            "ci_upper": 0.3597261033742263,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 1,
+            "mean": 0.39198499270824005,
+            "ci_lower": 0.37890941225546587,
+            "ci_upper": 0.40691683961193253,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 2,
+            "mean": 0.40540460220280855,
+            "ci_lower": 0.38648051912462533,
+            "ci_upper": 0.4239424550814713,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 3,
+            "mean": 0.3814350682770242,
+            "ci_lower": 0.3641803720733679,
+            "ci_upper": 0.39917693540307736,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 4,
+            "mean": 0.3681589864392613,
+            "ci_lower": 0.35095140133146036,
+            "ci_upper": 0.38586662758864304,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          }
+        ]
+      },
+      "orthogonal_drift": {
+        "concept": [
+          {
+            "rung": 0,
+            "mean": 0.9517882606287913,
+            "ci_lower": 0.9382359292789922,
+            "ci_upper": 0.9612824857673364,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 1,
+            "mean": 0.9353573593674782,
+            "ci_lower": 0.9231139201196089,
+            "ci_upper": 0.94450858271601,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 2,
+            "mean": 0.9292579599390272,
+            "ci_lower": 0.9147872779241064,
+            "ci_upper": 0.9400625835534188,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 3,
+            "mean": 0.9235385935709699,
+            "ci_lower": 0.911669974323202,
+            "ci_upper": 0.9335941092357356,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 4,
+            "mean": 0.8609598231279936,
+            "ci_lower": 0.8476314111589849,
+            "ci_upper": 0.8741841635801246,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          }
+        ],
+        "random": [
+          {
+            "rung": 0,
+            "mean": 0.9380144101466015,
+            "ci_lower": 0.9313501358198779,
+            "ci_upper": 0.943864915991471,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 1,
+            "mean": 0.9189722430814953,
+            "ci_lower": 0.9121984716560797,
+            "ci_upper": 0.9247986941975113,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 2,
+            "mean": 0.9124566803287469,
+            "ci_lower": 0.9039819046060067,
+            "ci_upper": 0.9207770456359979,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 3,
+            "mean": 0.9227739764713663,
+            "ci_lower": 0.9147427643853844,
+            "ci_upper": 0.9301317610834227,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 4,
+            "mean": 0.9281514908531835,
+            "ci_lower": 0.9209118355879726,
+            "ci_upper": 0.9350586896495504,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          }
+        ]
+      },
+      "split_half_pair_ceiling": {
+        "concept": [
+          {
+            "rung": 0,
+            "mean": 0.99385263890249,
+            "ci_lower": 0.9929297398446303,
+            "ci_upper": 0.9947866945532394,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 1,
+            "mean": 0.9944056288595216,
+            "ci_lower": 0.9934786341430519,
+            "ci_upper": 0.995325020625084,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 2,
+            "mean": 0.9957223800582744,
+            "ci_lower": 0.9947247299133807,
+            "ci_upper": 0.9965719151925393,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 3,
+            "mean": 0.9958976657438783,
+            "ci_lower": 0.9950894401289393,
+            "ci_upper": 0.9966040334299172,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          }
+        ],
+        "random": [
+          {
+            "rung": 0,
+            "mean": 0.9889740365682554,
+            "ci_lower": 0.9877234205402018,
+            "ci_upper": 0.9899983046840296,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 1,
+            "mean": 0.9887870835737625,
+            "ci_lower": 0.9875770358410031,
+            "ci_upper": 0.9898785147289457,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 2,
+            "mean": 0.9893199270499422,
+            "ci_lower": 0.9879773035164379,
+            "ci_upper": 0.9905433776175417,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          },
+          {
+            "rung": 3,
+            "mean": 0.9889511396139137,
+            "ci_lower": 0.9876232934952511,
+            "ci_upper": 0.990148992839188,
+            "confidence": 0.95,
+            "n_directions": 32,
+            "n_resamples": 1000,
+            "fraction_directions_positive": 1.0,
+            "cluster": "direction"
+          }
+        ]
+      }
+    },
+    "curvature_exceeds_an_arbitrary_axis": true,
+    "interpretation": "concept directions curve by more than matched random axes do, so the effect is not merely what conditioning on any coordinate produces",
+    "note": "random unit axes are a reference for what the statistics look like on an arbitrary direction, not a null hypothesis test"
+  },
+  "c3_shuffle_control": {
+    "statistic": "cos(d_k, d_k+1) with the coordinate assignment intact vs permuted",
+    "cos_consecutive_secants_by_rung": {
+      "real": [
+        {
+          "rung": 0,
+          "mean": 0.6786611662705591,
+          "ci_lower": 0.6198865712314339,
+          "ci_upper": 0.7351613117026705,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        },
+        {
+          "rung": 1,
+          "mean": 0.6888307290681595,
+          "ci_lower": 0.6224821747106214,
+          "ci_upper": 0.7488054961807707,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        },
+        {
+          "rung": 2,
+          "mean": 0.8034301575278273,
+          "ci_lower": 0.7677649166063408,
+          "ci_upper": 0.8328660257168968,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        },
+        {
+          "rung": 3,
+          "mean": 0.6869084402702289,
+          "ci_lower": 0.6235364933096879,
+          "ci_upper": 0.7382800175649546,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        }
+      ],
+      "shuffled": [
+        {
+          "rung": 0,
+          "mean": -0.5072408111531113,
+          "ci_lower": -0.5248712784617168,
+          "ci_upper": -0.48904588812762473,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 0.0,
+          "cluster": "direction"
+        },
+        {
+          "rung": 1,
+          "mean": -0.42022302475854767,
+          "ci_lower": -0.43822557559256514,
+          "ci_upper": -0.3997872133953081,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 0.0,
+          "cluster": "direction"
+        },
+        {
+          "rung": 2,
+          "mean": -0.42031927798068097,
+          "ci_lower": -0.44413962236328897,
+          "ci_upper": -0.39375282216137,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 0.0,
+          "cluster": "direction"
+        },
+        {
+          "rung": 3,
+          "mean": -0.5017506838638515,
+          "ci_lower": -0.5157987080344267,
+          "ci_upper": -0.4854965858985501,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 0.0,
+          "cluster": "direction"
+        }
+      ]
+    },
+    "orthogonal_drift_by_rung": {
+      "real": [
+        {
+          "rung": 0,
+          "mean": 0.9517882606287913,
+          "ci_lower": 0.9382359292789922,
+          "ci_upper": 0.9612824857673364,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        },
+        {
+          "rung": 1,
+          "mean": 0.9353573593674782,
+          "ci_lower": 0.9231139201196089,
+          "ci_upper": 0.94450858271601,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        },
+        {
+          "rung": 2,
+          "mean": 0.9292579599390272,
+          "ci_lower": 0.9147872779241064,
+          "ci_upper": 0.9400625835534188,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        },
+        {
+          "rung": 3,
+          "mean": 0.9235385935709699,
+          "ci_lower": 0.911669974323202,
+          "ci_upper": 0.9335941092357356,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        },
+        {
+          "rung": 4,
+          "mean": 0.8609598231279936,
+          "ci_lower": 0.8476314111589849,
+          "ci_upper": 0.8741841635801246,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        }
+      ],
+      "shuffled": [
+        {
+          "rung": 0,
+          "mean": 0.9981796514079073,
+          "ci_lower": 0.9969945913987084,
+          "ci_upper": 0.9991812637271391,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        },
+        {
+          "rung": 1,
+          "mean": 0.9978008850705835,
+          "ci_lower": 0.9966175625007928,
+          "ci_upper": 0.9987880571514507,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        },
+        {
+          "rung": 2,
+          "mean": 0.9986390605531819,
+          "ci_lower": 0.9980401494333396,
+          "ci_upper": 0.9991948752433093,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        },
+        {
+          "rung": 3,
+          "mean": 0.9980817985094317,
+          "ci_lower": 0.9970593784516074,
+          "ci_upper": 0.998984134575372,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        },
+        {
+          "rung": 4,
+          "mean": 0.9982803514243488,
+          "ci_lower": 0.9967157723347062,
+          "ci_upper": 0.999225512883326,
+          "confidence": 0.95,
+          "n_directions": 32,
+          "n_resamples": 1000,
+          "fraction_directions_positive": 1.0,
+          "cluster": "direction"
+        }
+      ]
+    },
+    "real_minus_shuffled": {
+      "mean": 1.1768410727232415,
+      "ci_lower": 1.1423674791928295,
+      "ci_upper": 1.2140405574717317,
+      "confidence": 0.95,
+      "n_directions": 32,
+      "n_resamples": 1000,
+      "fraction_directions_positive": 1.0,
+      "cluster": "direction"
+    },
+    "structure_is_destroyed_by_shuffling": true,
+    "interpretation": "with the labels permuted the consecutive secants no longer point the same way, so the measured alignment reflects the coordinate and not the binning procedure"
+  },
+  "c4_reliability_and_robustness": {
+    "primary_statistic": "mean(split-half pair ceiling - cos(d_k, d_k+1)) over directions",
+    "shortfall_interval": {
+      "mean": 0.28051195510684734,
+      "ci_lower": 0.24606788816689917,
+      "ci_upper": 0.3109937593235192,
+      "confidence": 0.95,
+      "n_directions": 32,
+      "n_resamples": 1000,
+      "fraction_directions_positive": 1.0,
+      "cluster": "direction"
+    },
+    "split_half_pair_ceiling": {
+      "mean": 0.994969578391041,
+      "ci_lower": 0.9941405050358545,
+      "ci_upper": 0.9957545769283269,
+      "confidence": 0.95,
+      "n_directions": 32,
+      "n_resamples": 1000,
+      "fraction_directions_positive": 1.0,
+      "cluster": "direction"
+    },
+    "leave_one_direction_out": {
+      "lovo_min": 0.2759878497480875,
+      "lovo_max": 0.28676006007727417,
+      "n_directions": 32,
+      "note": "pooled shortfall recomputed with each direction removed in turn"
+    },
+    "n_directions_positive": 32,
+    "per_direction_shortfall": [
+      0.3479032414600951,
+      0.13274407022572465,
+      0.2550313830073508,
+      0.1604211661701079,
+      0.1865588741623384,
+      0.2749757256363722,
+      0.2712667627285401,
+      0.2894642739342421,
+      0.22906115332812527,
+      0.4088421712165421,
+      0.3987341475339754,
+      0.3403147630712889,
+      0.4064272094879011,
+      0.20922178939248312,
+      0.34152037070065044,
+      0.28104928261580014,
+      0.3089246281249252,
+      0.11468330223374051,
+      0.19155543260342958,
+      0.28701914957166175,
+      0.08682070102361616,
+      0.3445415550305877,
+      0.42075922122840165,
+      0.34936397955187215,
+      0.36037468149346497,
+      0.360627050081763,
+      0.34342125058984263,
+      0.3899397448253493,
+      0.24347072927208954,
+      0.16220007378102033,
+      0.3046807294978091,
+      0.17446394983800378
+    ],
+    "sign_is_unanimous": true,
+    "robust_to_dropping_any_direction": true,
+    "interpretation": "the reliability ceiling sits near 1, so the shortfall is not an artefact of noisy bin means; dropping any single direction leaves it above the calibrated margin"
+  },
+  "c5_curvature_vs_steering_outcome": {
+    "available": false,
+    "reason": "no steering outcome supplied"
+  },
+  "recomputes_no_activation": true,
+  "dev_vectors_accessed": false,
+  "held_out_accessed": false,
+  "llm_judge_used": false,
+  "trained_anything": false
+}

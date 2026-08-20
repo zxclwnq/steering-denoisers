@@ -1,0 +1,352 @@
+{
+  "experiment": "c6_b_direction_join_v1",
+  "preregistered": false,
+  "exploratory_post_hoc": true,
+  "question": "does the nonlinearity of the conditional geometry beyond covariance predict how badly steering repair fails, per direction?",
+  "primary_measure": "mse_linear_minus_mse_quadratic_held_out",
+  "primary_outcome": "matched_strength_paired_delta_nll",
+  "variance_control": "log(v' Sigma v)",
+  "bootstrap_seed": 20260923,
+  "generated_utc": "2026-08-20T10:26:33.511260+00:00",
+  "source_revision": "snapshot-sha256:3d3199b13bd00c15cd27a18f159b61393e9da00b7b8f1216508b60ad7228ef2c",
+  "b_source": "results/steering_denoiser_b_v1",
+  "c6_source": "results/c6_nonlinearity_steering_directions_v1",
+  "b_direction_pool_indices": [
+    508,
+    2193,
+    2617,
+    2951,
+    3903,
+    4245,
+    4947,
+    5230,
+    8606,
+    8765,
+    9238,
+    9361,
+    9463,
+    9731,
+    12142,
+    12143,
+    12302,
+    12796,
+    12958,
+    13692,
+    14592,
+    15381,
+    16420,
+    17646,
+    18241,
+    18541,
+    18862,
+    19113,
+    20236,
+    20912,
+    21527,
+    22207
+  ],
+  "c6_direction_pool_indices": [
+    508,
+    2193,
+    2617,
+    2951,
+    3903,
+    4245,
+    4947,
+    5230,
+    8606,
+    8765,
+    9238,
+    9361,
+    9463,
+    9731,
+    12142,
+    12143,
+    12302,
+    12796,
+    12958,
+    13692,
+    14592,
+    15381,
+    16420,
+    17646,
+    18241,
+    18541,
+    18862,
+    19113,
+    20236,
+    20912,
+    21527,
+    22207
+  ],
+  "shared_direction_pool_indices": [
+    508,
+    2193,
+    2617,
+    2951,
+    3903,
+    4245,
+    4947,
+    5230,
+    8606,
+    8765,
+    9238,
+    9361,
+    9463,
+    9731,
+    12142,
+    12143,
+    12302,
+    12796,
+    12958,
+    13692,
+    14592,
+    15381,
+    16420,
+    17646,
+    18241,
+    18541,
+    18862,
+    19113,
+    20236,
+    20912,
+    21527,
+    22207
+  ],
+  "join_checks": {
+    "b_n_directions": 32,
+    "c6_n_directions": 32,
+    "b_ids_unique": true,
+    "c6_ids_unique": true,
+    "n_shared_directions": 32,
+    "b_direction_seed_source": "natural_support_v1 plan (inherited by Experiment B)",
+    "c6_direction_selection": {
+      "source": "natural_support_v1 frozen draw, inherited by Experiment B",
+      "direction_seed": 20260902,
+      "chosen_for_this_analysis": false
+    },
+    "b_outcome_available": true,
+    "c6_measure_available": true,
+    "c6_measure_source": "results/c6_nonlinearity_steering_directions_v1/nonlinearity.json",
+    "held_out_accessed": false
+  },
+  "modified_frozen_artifacts": false,
+  "dev_vectors_accessed": false,
+  "held_out_accessed": false,
+  "llm_judge_used": false,
+  "trained_anything": false,
+  "direction_rows": [
+    {
+      "direction_pool_index": 508,
+      "delta_mse_linear_minus_quadratic": 0.02800579349255017,
+      "matched_delta_nll": 0.0069971799850463865,
+      "projected_variance": 20.52975394265556
+    },
+    {
+      "direction_pool_index": 2193,
+      "delta_mse_linear_minus_quadratic": 0.00925374918180566,
+      "matched_delta_nll": -0.002063155174255371,
+      "projected_variance": 13.093655243017345
+    },
+    {
+      "direction_pool_index": 2617,
+      "delta_mse_linear_minus_quadratic": 0.01957113004280764,
+      "matched_delta_nll": -0.0006871700286865234,
+      "projected_variance": 16.76583087519559
+    },
+    {
+      "direction_pool_index": 2951,
+      "delta_mse_linear_minus_quadratic": 0.021004988767217014,
+      "matched_delta_nll": -0.0008678674697875976,
+      "projected_variance": 9.82041623532426
+    },
+    {
+      "direction_pool_index": 3903,
+      "delta_mse_linear_minus_quadratic": 0.008522753287536489,
+      "matched_delta_nll": 0.0015890836715698243,
+      "projected_variance": 11.47517890456967
+    },
+    {
+      "direction_pool_index": 4245,
+      "delta_mse_linear_minus_quadratic": 0.003037048012776822,
+      "matched_delta_nll": 0.001351332664489746,
+      "projected_variance": 9.891540633631696
+    },
+    {
+      "direction_pool_index": 4947,
+      "delta_mse_linear_minus_quadratic": 0.005071192859496421,
+      "matched_delta_nll": -0.005179715156555176,
+      "projected_variance": 11.118894148485774
+    },
+    {
+      "direction_pool_index": 5230,
+      "delta_mse_linear_minus_quadratic": 0.0223257775818686,
+      "matched_delta_nll": -0.0008055686950683594,
+      "projected_variance": 15.650024169378034
+    },
+    {
+      "direction_pool_index": 8606,
+      "delta_mse_linear_minus_quadratic": 0.01334566881458965,
+      "matched_delta_nll": 0.0014452695846557616,
+      "projected_variance": 35.55639689383732
+    },
+    {
+      "direction_pool_index": 8765,
+      "delta_mse_linear_minus_quadratic": 0.01016271413861336,
+      "matched_delta_nll": -0.0012472152709960937,
+      "projected_variance": 8.666215210339008
+    },
+    {
+      "direction_pool_index": 9238,
+      "delta_mse_linear_minus_quadratic": 0.006965717269547866,
+      "matched_delta_nll": 0.00036945343017578123,
+      "projected_variance": 15.055311196785016
+    },
+    {
+      "direction_pool_index": 9361,
+      "delta_mse_linear_minus_quadratic": 0.01729325553801342,
+      "matched_delta_nll": 0.00021257400512695313,
+      "projected_variance": 12.126358129748764
+    },
+    {
+      "direction_pool_index": 9463,
+      "delta_mse_linear_minus_quadratic": 0.017705467322493895,
+      "matched_delta_nll": 0.0015285491943359375,
+      "projected_variance": 17.432417017977215
+    },
+    {
+      "direction_pool_index": 9731,
+      "delta_mse_linear_minus_quadratic": 0.009843761643340443,
+      "matched_delta_nll": -0.0021256923675537108,
+      "projected_variance": 9.381013921638473
+    },
+    {
+      "direction_pool_index": 12142,
+      "delta_mse_linear_minus_quadratic": 0.009821061193896696,
+      "matched_delta_nll": -0.0008943080902099609,
+      "projected_variance": 8.393461257454259
+    },
+    {
+      "direction_pool_index": 12143,
+      "delta_mse_linear_minus_quadratic": 0.007384251417542842,
+      "matched_delta_nll": -0.003105568885803223,
+      "projected_variance": 11.220274071536522
+    },
+    {
+      "direction_pool_index": 12302,
+      "delta_mse_linear_minus_quadratic": 0.012154806955367192,
+      "matched_delta_nll": -0.0029938220977783203,
+      "projected_variance": 9.244736162320002
+    },
+    {
+      "direction_pool_index": 12796,
+      "delta_mse_linear_minus_quadratic": 0.005983290579496092,
+      "matched_delta_nll": 0.002243304252624512,
+      "projected_variance": 12.922365004154242
+    },
+    {
+      "direction_pool_index": 12958,
+      "delta_mse_linear_minus_quadratic": 0.012631596540150447,
+      "matched_delta_nll": -0.0068533897399902345,
+      "projected_variance": 14.02111271900895
+    },
+    {
+      "direction_pool_index": 13692,
+      "delta_mse_linear_minus_quadratic": 0.004021608150440059,
+      "matched_delta_nll": 0.010452532768249511,
+      "projected_variance": 8.369644702986616
+    },
+    {
+      "direction_pool_index": 14592,
+      "delta_mse_linear_minus_quadratic": 0.006470754119869859,
+      "matched_delta_nll": 2.269744873046875e-05,
+      "projected_variance": 14.49462061859995
+    },
+    {
+      "direction_pool_index": 15381,
+      "delta_mse_linear_minus_quadratic": 0.006085597597531134,
+      "matched_delta_nll": -0.0025501012802124023,
+      "projected_variance": 11.445343784272314
+    },
+    {
+      "direction_pool_index": 16420,
+      "delta_mse_linear_minus_quadratic": 0.018040032686237772,
+      "matched_delta_nll": -0.019656276702880858,
+      "projected_variance": 26.135896504847224
+    },
+    {
+      "direction_pool_index": 17646,
+      "delta_mse_linear_minus_quadratic": 0.004068119491070554,
+      "matched_delta_nll": 0.000982952117919922,
+      "projected_variance": 10.788876313135294
+    },
+    {
+      "direction_pool_index": 18241,
+      "delta_mse_linear_minus_quadratic": 0.005276663035010287,
+      "matched_delta_nll": 0.007104992866516113,
+      "projected_variance": 13.943902507685742
+    },
+    {
+      "direction_pool_index": 18541,
+      "delta_mse_linear_minus_quadratic": 0.006830443425243082,
+      "matched_delta_nll": 0.001886892318725586,
+      "projected_variance": 12.764567523054197
+    },
+    {
+      "direction_pool_index": 18862,
+      "delta_mse_linear_minus_quadratic": 0.007101884694710847,
+      "matched_delta_nll": 0.0037813901901245115,
+      "projected_variance": 8.909951285042359
+    },
+    {
+      "direction_pool_index": 19113,
+      "delta_mse_linear_minus_quadratic": 0.0139122051919367,
+      "matched_delta_nll": -0.00466921329498291,
+      "projected_variance": 13.52191101415088
+    },
+    {
+      "direction_pool_index": 20236,
+      "delta_mse_linear_minus_quadratic": 0.032589796819735284,
+      "matched_delta_nll": -0.002235698699951172,
+      "projected_variance": 25.628862951266044
+    },
+    {
+      "direction_pool_index": 20912,
+      "delta_mse_linear_minus_quadratic": 0.021213364694651737,
+      "matched_delta_nll": 0.003087759017944336,
+      "projected_variance": 25.212284656371537
+    },
+    {
+      "direction_pool_index": 21527,
+      "delta_mse_linear_minus_quadratic": 0.012414384255150068,
+      "matched_delta_nll": 0.0019476652145385743,
+      "projected_variance": 11.674587498937257
+    },
+    {
+      "direction_pool_index": 22207,
+      "delta_mse_linear_minus_quadratic": 0.020389049906713197,
+      "matched_delta_nll": 0.0033668041229248046,
+      "projected_variance": 24.052268924290466
+    }
+  ],
+  "statistics": {
+    "spearman_rho": -0.12866568914956011,
+    "partial_spearman_rho_after_log_variance": -0.1840175953079179,
+    "beta_0": 0.004509724059706413,
+    "beta_2_log_variance": -0.001689180465133406,
+    "beta_1": -0.02695429601350601,
+    "beta_1_ci": [
+      -0.2941244176621549,
+      0.2742445487889518
+    ],
+    "rho_ci": [
+      -0.4772727272727273,
+      0.27386363636363614
+    ],
+    "n_directions": 32
+  },
+  "verdict": {
+    "outcome": "NO_ASSOCIATION",
+    "statistics_computed": true
+  }
+}
