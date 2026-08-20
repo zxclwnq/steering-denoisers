@@ -1,0 +1,109 @@
+{
+  "verdict_frozen_rule": "CURVATURE_BEYOND_COVARIANCE",
+  "surrogate": {
+    "real_shortfall_mean": 0.28051195510684734,
+    "surrogate_shortfall_mean": 0.0032792383424505517,
+    "difference": {
+      "usable": true,
+      "mean": 0.27723271676439676,
+      "ci_lower": 0.2430581956935767,
+      "ci_upper": 0.3077752720594005,
+      "confidence": 0.95,
+      "n_directions": 32,
+      "n_resamples": 1000,
+      "fraction_directions_positive": 1.0,
+      "cluster": "direction"
+    },
+    "covariance_reproduction_error": 0.025696053655613296
+  },
+  "matched_random": {
+    "concept": 0.28051195510684734,
+    "matched": 0.18036443860868143,
+    "unmatched": 0.2124669238245799,
+    "difference": {
+      "usable": true,
+      "mean": 0.10014751649816592,
+      "ci_lower": 0.0641692354547904,
+      "ci_upper": 0.13673428183679964,
+      "confidence": 0.95,
+      "n_directions": 32,
+      "n_resamples": 1000,
+      "fraction_directions_positive": 0.84375,
+      "cluster": "direction"
+    },
+    "balance": {
+      "projected_variance": {
+        "concept_mean": 17.0904146732524,
+        "matched_mean": 8.057183611366911,
+        "unmatched_mean": 5.7247208140881325,
+        "mean_abs_difference_after": 0.628946924401732,
+        "max_abs_difference_after": 1.9788670673426352,
+        "mean_abs_difference_before": 0.9710593741166701,
+        "scale": "log"
+      },
+      "cos_v_sigma_v": {
+        "concept_mean": 0.5093735695646775,
+        "matched_mean": 0.39826419559934256,
+        "unmatched_mean": 0.49045176141793345,
+        "mean_abs_difference_after": 0.11121062417748857,
+        "max_abs_difference_after": 0.3333743020551683,
+        "mean_abs_difference_before": 0.06691448547606091,
+        "scale": "linear"
+      }
+    }
+  },
+  "principal_components_shortfall_mean": 0.4359449051641713,
+  "held_out_fit": {
+    "mse_linear": 5.558779787829913,
+    "mse_quadratic": 5.547179566491427,
+    "delta_interval": {
+      "mean": 0.011600221338486733,
+      "ci_lower": 0.009599260090563593,
+      "ci_upper": 0.014005152741400469,
+      "confidence": 0.95,
+      "n_directions": 32,
+      "n_resamples": 1000,
+      "fraction_directions_positive": 1.0,
+      "cluster": "direction",
+      "usable": true
+    },
+    "relative_interval": {
+      "mean": 0.002090224757736627,
+      "ci_lower": 0.0017265910133476027,
+      "ci_upper": 0.0025251875596276558,
+      "confidence": 0.95,
+      "n_directions": 32,
+      "n_resamples": 1000,
+      "fraction_directions_positive": 1.0,
+      "cluster": "direction"
+    },
+    "residual_to_secant_ratio": 0.5206865305923394
+  },
+  "cos_dk_v_pooled": 0.37522073564450276,
+  "cos_dk_sigma_v_pooled": 0.7446591690675518,
+  "shortfall_vs_variance": {
+    "spearman_rho": 0.38526593350054666,
+    "ci_lower": 0.16358527879606408,
+    "ci_upper": 0.5763312753231717,
+    "n_directions": 72,
+    "confidence": 0.95,
+    "excludes_zero": true
+  },
+  "matching_balance_achieved": false,
+  "profile_contrast": {
+    "definition": "cos(d_k, v) at secant 4 minus secant 2, unchanged from C",
+    "concept_mean": 0.14441152735764962,
+    "matched_null_mean": -0.0379216719571433,
+    "difference": {
+      "usable": true,
+      "mean": 0.18233319931479292,
+      "ci_lower": 0.1364321518899473,
+      "ci_upper": 0.22978208174279166,
+      "confidence": 0.95,
+      "n_directions": 32,
+      "n_resamples": 1000,
+      "fraction_directions_positive": 0.9375,
+      "cluster": "direction"
+    }
+  }
+}

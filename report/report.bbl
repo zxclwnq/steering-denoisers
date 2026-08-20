@@ -1,0 +1,113 @@
+\begin{thebibliography}{10}
+
+\bibitem{arditi2024refusal}
+Andy Arditi, Oscar Obeso, Aaquib Syed, Daniel Paleka, Nina Panickssery, Wes
+  Gurnee, and Neel Nanda.
+\newblock Refusal in language models is mediated by a single direction.
+\newblock In {\em Advances in Neural Information Processing Systems}, 2024.
+\newblock Official implementation:
+  \url{https://github.com/andyrdt/refusal_direction}.
+
+\bibitem{bloom2024gpt2saes}
+Joseph Bloom.
+\newblock Open source sparse autoencoders for all residual stream layers of
+  {GPT2-Small}.
+\newblock AI Alignment Forum; weights at
+  \url{https://huggingface.co/jbloom/GPT2-Small-SAEs-Reformatted}, 2024.
+
+\bibitem{bricken2023monosemanticity}
+Trenton Bricken, Adly Templeton, Joshua Batson, Brian Chen, Adam Jermyn, Tom
+  Conerly, Nicholas Turner, Cem Anil, Carson Denison, Amanda Askell, et~al.
+\newblock Towards monosemanticity: Decomposing language models with dictionary
+  learning.
+\newblock {\em Transformer Circuits Thread}, 2023.
+
+\bibitem{cameron2015clusterbootstrap}
+A.~Colin Cameron and Douglas~L. Miller.
+\newblock A practitioner's guide to cluster-robust inference.
+\newblock {\em Journal of Human Resources}, 50(2):317--372, 2015.
+
+\bibitem{efron2011tweedie}
+Bradley Efron.
+\newblock Tweedie's formula and selection bias.
+\newblock {\em Journal of the American Statistical Association},
+  106(496):1602--1614, 2011.
+
+\bibitem{gao2024scalingsae}
+Leo Gao, Tom~Dupr\'e la~Tour, Henk Tillman, Gabriel Goh, Rajan Troll, Alec
+  Radford, Ilya Sutskever, Jan Leike, and Jeffrey Wu.
+\newblock Scaling and evaluating sparse autoencoders.
+\newblock {\em arXiv preprint arXiv:2406.04093}, 2024.
+
+\bibitem{holtzman2020degeneration}
+Ari Holtzman, Jan Buys, Li~Du, Maxwell Forbes, and Yejin Choi.
+\newblock The curious case of neural text degeneration.
+\newblock In {\em International Conference on Learning Representations (ICLR)},
+  2020.
+
+\bibitem{li2016diversity}
+Jiwei Li, Michel Galley, Chris Brockett, Jianfeng Gao, and Bill Dolan.
+\newblock A diversity-promoting objective function for neural conversation
+  models.
+\newblock In {\em NAACL-HLT}, 2016.
+
+\bibitem{li2023iti}
+Kenneth Li, Oam Patel, Fernanda Vi\'egas, Hanspeter Pfister, and Martin
+  Wattenberg.
+\newblock Inference-time intervention: Eliciting truthful answers from a
+  language model.
+\newblock In {\em Advances in Neural Information Processing Systems (NeurIPS)},
+  2023.
+
+\bibitem{lipman2023flowmatching}
+Yaron Lipman, Ricky T.~Q. Chen, Heli Ben-Hamu, Maximilian Nickel, and Matt Le.
+\newblock Flow matching for generative modeling.
+\newblock In {\em International Conference on Learning Representations (ICLR)},
+  2023.
+
+\bibitem{liu2023rectifiedflow}
+Xingchao Liu, Chengyue Gong, and Qiang Liu.
+\newblock Flow straight and fast: Learning to generate and transfer data with
+  rectified flow.
+\newblock In {\em International Conference on Learning Representations (ICLR)},
+  2023.
+
+\bibitem{luo2026glp}
+Grace Luo, Jiahai Feng, Trevor Darrell, Alec Radford, and Jacob Steinhardt.
+\newblock Learning a generative meta-model of {LLM} activations.
+\newblock In {\em International Conference on Machine Learning (ICML)}, 2026.
+\newblock Generative Latent Prior (GLP); implementation at
+  \url{https://github.com/g-luo/generative_latent_prior}.
+
+\bibitem{meng2022sdedit}
+Chenlin Meng, Yutong He, Yang Song, Jiaming Song, Jiajun Wu, Jun-Yan Zhu, and
+  Stefano Ermon.
+\newblock {SDEdit}: Guided image synthesis and editing with stochastic
+  differential equations.
+\newblock In {\em International Conference on Learning Representations (ICLR)},
+  2022.
+
+\bibitem{nanda2022transformerlens}
+Neel Nanda and Joseph Bloom.
+\newblock {TransformerLens}.
+\newblock \url{https://github.com/TransformerLensOrg/TransformerLens}, 2022.
+
+\bibitem{radford2019gpt2}
+Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, and Ilya
+  Sutskever.
+\newblock Language models are unsupervised multitask learners.
+\newblock {\em OpenAI technical report}, 2019.
+\newblock GPT-2.
+
+\bibitem{turner2023actadd}
+Alexander~Matt Turner, Lisa Thiergart, Gavin Leech, David Udell, Juan~J.
+  Vazquez, Ulisse Mini, and Monte MacDiarmid.
+\newblock Steering language models with activation engineering.
+\newblock {\em arXiv preprint arXiv:2308.10248}, 2023.
+
+\bibitem{vincent2008denoising}
+Pascal Vincent, Hugo Larochelle, Yoshua Bengio, and Pierre-Antoine Manzagol.
+\newblock Extracting and composing robust features with denoising autoencoders.
+\newblock In {\em International Conference on Machine Learning (ICML)}, 2008.
+
+\end{thebibliography}

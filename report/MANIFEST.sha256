@@ -1,0 +1,31 @@
+# Checksums of the reproducible outputs of scripts/build_report_figures.py.
+# Rebuilding from the tracked result artifacts reproduces these bit-for-bit.
+# Figure PNG/PDF files are deliberately absent: matplotlib stamps a creation
+# date into them, so their hashes change on every build while their content
+# does not. Numeric agreement between report and artifacts is checked by
+# scripts/verify_report_numbers.py instead.
+#
+# Check with:  cd report && sha256sum -c MANIFEST.sha256
+bf0ac73a4c8e1d893cd05496ae2a34085f289266a4be7d816f63f446819ad934  ./data/fig01_additive_pareto.json
+959856d766a211a5db5d57374ca2757fa49e8521908788a2ca79b9189a793d0f  ./data/fig02_method_comparison.json
+d298a28b5e07c13d6047df7adbe3957a8c8405dd9ccc4ae1b5b34f5023096b8f  ./data/fig03_matched_strength.json
+10ab9956c2ce93bfdc7a12bda64fc0c0b610a2fd6fa879de3fa80d2291e0139d  ./data/fig04_denoiser_ability.json
+a59e0545b5172111933aea0539fe6911b18b18b9cfedf40d07c73a8ba05303f4  ./data/fig05_capacity_transfer.json
+9b165b57eed589321ee4fcee21dc374654191e316889f11979fe32c2b587862e  ./data/fig06_conditional_control.json
+d99fb3de8da97989c9e2233ed0dda26965948ceb49d7da622cfcd6eaff7d605b  ./data/fig07_hard_clamp_cost.json
+29cb8763e303ee066d642bd16ba7ade80b121213017338e26adfd56abf27eaad  ./data/fig08_t1_reconstruction.json
+6a25d05def5498626a73b68027269cd2296884f72a3f01e753826555ab3fc396  ./data/fig09_t2_naturalization.json
+3a53bbd1c96ad08526183bf2adf629ac6573712ff3a198350ddb3523914d22dd  ./data/fig10_mechanism.json
+ab4bada2c981de860417e9b3edf1092564d01979dc7dbe4db5fe8234fb534b0b  ./data/fig11_tangent_on_dev.json
+091e2a1b8c463fa4154eb89e553ad0dd4c0dec4f28addebb39138205d846ed46  ./data/fig12_vp_path_control.json
+43726677e858a0dc1de76b0964808d839dc2941c34cbd8c5d5e44447ccec8dde  ./data/fig13_steering_denoiser_matched.json
+8a94eab8cc273966a21170bbf9f7e70e55ca808e918999d0bfecf6b1055e2e54  ./data/fig14_concept_curvature.json
+37ee86489e6c7c1a8fc911102c30de779f9651b1c91af70f555d98d62912776b  ./data/t02_distn.json
+7d2d02e908505ceee09df2c6646d7285ac6b5cacf2e58eca64b0dd916c57e5cb  ./tables/t01_additive_sweep.csv
+50461a03346e00efa2e272df7cf4c489194e2a2c1de1ff1df596521c829528bc  ./tables/t01_additive_sweep.md
+c0b76d78794e6236aad00bc39a53623c02ea7f022033b5bb43be2fba3f673d6f  ./tables/t02_distn.csv
+7df36b089ee4c19fbd23719c90647ebc5269d72559e59e4b20a52025c97e0730  ./tables/t02_distn.md
+680106ea91d7523301d5350d33b666fd6ef67cdd95e4eb2f45a07b4fc7b97c57  ./tables/t03_methods_summary.csv
+b1676427c3aa9c42cf4c6c7194f0b51244a7efdddb6a4f093fd06dd96834c78f  ./tables/t03_methods_summary.md
+26b4f2a081e75088de9793823bd2dd07fec5c5094d0f57dcf804514d36ff0ed8  ./tables/t04_denoiser_reconstruction.csv
+46eae1fe437f7e0c8ec2ccba93d254579abad9849ba8c27cfb0ddf20dfa384bd  ./tables/t04_denoiser_reconstruction.md

@@ -1,0 +1,22 @@
+{
+  "sigma": [
+    0.25,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "corrupted_delta_lm": [
+    0.0451,
+    0.1997,
+    0.8722,
+    2.7236
+  ],
+  "denoised_delta_lm": [
+    0.0307,
+    0.1138,
+    0.4239,
+    1.1619
+  ],
+  "source": "results/gaussian_denoiser_v1/reconstruction_record.json",
+  "checkpoint_sha256": "963b4dda162d60f1064b47979843c6ca99b733a1837196abc758432e7770c583"
+}

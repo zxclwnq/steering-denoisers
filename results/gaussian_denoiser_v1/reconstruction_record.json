@@ -1,0 +1,18 @@
+{
+  "experiment": "gaussian_activation_denoiser_v1",
+  "class": "method_development",
+  "held_out_accessed": false,
+  "record_type": "transcribed",
+  "note": "The weights of this early denoiser are not present in the repository, so these four values are transcribed from the frozen experimental record rather than recomputed. Every other number in the report is recomputed from a result artifact. The report build script parses this file back and cross-checks it against the values it plots, so the two cannot drift apart.",
+  "checkpoint_path": "checkpoints/d_raw_v1_long/step_040000.pt",
+  "checkpoint_sha256": "963b4dda162d60f1064b47979843c6ca99b733a1837196abc758432e7770c583",
+  "step": 40000,
+  "corruption": "isotropic Gaussian, concept-agnostic, scaled by sigma",
+  "metric": "GPT-2 conditional continuation loss minus the clean-model loss, in nats",
+  "reconstruction": [
+    {"corruption_scale": 0.25, "corrupted_delta_lm": 0.0451, "denoised_delta_lm": 0.0307},
+    {"corruption_scale": 0.50, "corrupted_delta_lm": 0.1997, "denoised_delta_lm": 0.1138},
+    {"corruption_scale": 1.00, "corrupted_delta_lm": 0.8722, "denoised_delta_lm": 0.4239},
+    {"corruption_scale": 2.00, "corrupted_delta_lm": 2.7236, "denoised_delta_lm": 1.1619}
+  ]
+}

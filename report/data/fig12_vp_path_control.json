@@ -1,0 +1,47 @@
+{
+  "linear": {
+    "t1_recovered_fraction": 0.7730066764272866,
+    "t1_verdict": "PASS",
+    "t2_mean": 0.0061842486262321476,
+    "t2_ci": [
+      0.001630796287208796,
+      0.010788144897669553
+    ],
+    "t2_verdict": "FAIL",
+    "primary_cell": "pooled_t0.10_nfe1_tangent_flow"
+  },
+  "variance_preserving": {
+    "t1_recovered_fraction": 0.7321028899516219,
+    "t1_verdict": "PASS",
+    "t2_mean": 0.006127694994211197,
+    "t2_ci": [
+      0.0018716770410537721,
+      0.010268355347216127
+    ],
+    "t2_verdict": "FAIL",
+    "primary_cell": "pooled_t0.07_nfe1_vp_tangent_flow",
+    "primary_t_start": 0.07044657495455456
+  },
+  "clamp_arm_reproduction": {
+    "q50": {
+      "linear": 0.003183756023645401,
+      "variance_preserving": 0.003183756023645401
+    },
+    "q75": {
+      "linear": 0.0034140795469284058,
+      "variance_preserving": 0.0034140795469284058
+    },
+    "q90": {
+      "linear": 0.0076740942895412445,
+      "variance_preserving": 0.0076740942895412445
+    },
+    "q95": {
+      "linear": 0.014700103551149368,
+      "variance_preserving": 0.014700103551149368
+    },
+    "q99": {
+      "linear": 0.05368851497769356,
+      "variance_preserving": 0.05368851497769356
+    }
+  }
+}

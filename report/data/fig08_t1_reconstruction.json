@@ -1,0 +1,46 @@
+{
+  "gate": {
+    "gate": "T1",
+    "primary_cell": "t0.50_nfe1_tangent",
+    "primary_t_start": 0.5,
+    "primary_nfe": 1,
+    "corruption_control_cell": "t0.50_corrupted",
+    "corruption_delta_lm": 1.3099644891917706,
+    "min_recovered_fraction": 0.25,
+    "threshold_status": "frozen 2026-08-16 before any T1 result; pragmatic preregistered convention, not a theoretically derived constant",
+    "bootstrap_unit": "direction_cluster_then_sequence",
+    "recovered_fraction": 0.7730066764272866,
+    "paired_ci_excludes_zero_and_is_negative": true,
+    "formal_verdict_eligible": true,
+    "verdict": "PASS",
+    "consequence": "T2 is worth running"
+  },
+  "ci": {
+    "mean": -1.0126112960278988,
+    "ci_lower": -1.072443319298327,
+    "ci_upper": -0.949260906688869,
+    "confidence": 0.95,
+    "n_units": 32,
+    "n_observations": 64,
+    "n_resamples": 2000,
+    "unit": "direction_cluster_then_sequence",
+    "seed": 20260910
+  },
+  "cells": {
+    "t0.25": {
+      "corrupted": 0.16701402887701988,
+      "reconstructed": 0.043050214648246765,
+      "recovered_fraction": 0.7422359370783959
+    },
+    "t0.50": {
+      "corrupted": 1.3099644891917706,
+      "reconstructed": 0.29735319316387177,
+      "recovered_fraction": 0.7730066764272866
+    },
+    "t0.75": {
+      "corrupted": 3.640247978270054,
+      "reconstructed": 1.4440518878400326,
+      "recovered_fraction": 0.6033094732941008
+    }
+  }
+}
