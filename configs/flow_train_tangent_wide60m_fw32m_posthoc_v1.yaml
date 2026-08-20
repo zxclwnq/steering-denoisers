@@ -1,0 +1,195 @@
+# ---------------------------------------------------------------
+# NOT RUN. This config was prepared for a post-hoc capacity control
+# that was ABANDONED on 2026-08-16 after the GPU worker failed four
+# consecutive times under sustained load (~60, ~50, ~24 and <20 min).
+# No checkpoint, no T1 and no T2 result exists for it. Status is left
+# as `authorized` only because it was authorized; nothing was trained.
+# See docs/BRANCH_CLOSURE_CONSTRAINT_PRESERVING_TANGENT_FLOW.md.
+# ---------------------------------------------------------------
+version: 1
+experiment_id: flow_train_tangent_wide60m_fw32m_posthoc_v1
+experiment_class: tangent_prior_method_development
+
+# ===================================================================
+# POST-HOC EXPLORATORY CAPACITY CONTROL. NOT A CONFIRMATORY ARM.
+#
+# The frozen stop rule (docs/TANGENT_FLOW_PROTOCOL.md section 6) names "more
+# parameters" as a forbidden rescue, and it FIRED on 2026-08-16 when T2 failed
+# at 16M. This run is authorized by explicit human instruction on 2026-08-16
+# AFTER that result was observed, and is recorded as post-hoc under
+# RESEARCH_GOVERNANCE section 4.
+#
+# What it can establish: whether 16M capacity was the binding constraint, i.e.
+# WHY the branch failed. That strengthens the write-up and could motivate a NEW
+# preregistered hypothesis.
+#
+# What it CANNOT do: overturn the frozen T2 FAIL. The frozen result stands
+# permanently regardless of this arm's outcome. Any favourable number here is
+# exploratory and must never be presented as preregistered.
+#
+# Everything except architecture width is byte-identical to the 16M arm, so the
+# comparison isolates capacity and nothing else.
+# ===================================================================
+#
+# AUTHORIZED by explicit human instruction on 2026-08-16, after:
+#   * worker preflight (RTX 3090, torch 2.6.0+cu124, CUDA available);
+#   * read-only real-artifact validation of resid7_fw_val_1024k_v1 through
+#     load_validated_evaluation_bundle (all invariants PASS);
+#   * 185 worker smoke tests PASS, plus a CUDA tangent/trainer/checkpoint smoke.
+# Only this status field changed. `status` lives in `raw` and is excluded from
+# the config fingerprint, so the scientific fingerprint is unchanged:
+#   e4af61135b0205cdcd6f196a61d5af464f0369b29e9bcaa471fd0764e7f85499
+status: authorized
+
+flow_core_config: configs/flow_core_conditional_60m_v1.yaml
+
+experiment_card:
+  post_hoc: true
+  supersedes_frozen_t2_result: false
+  frozen_t2_result_stands: "FAIL, pooled dNLL +0.006184, CI [+0.001631, +0.010788]"
+  hypothesis_posthoc: >-
+    Was 16M capacity the binding constraint on post-clamp naturalization? The T1
+    diagnostic showed an unmatched 60M isotropic prior outscoring the 16M tangent
+    model on the tangent task (0.8371 vs 0.7730 recovered), so capacity is not an
+    absurd explanation. Against it: the T2 penalty scales monotonically with
+    orthogonal correction magnitude, which capacity would have to change in SIGN
+    rather than magnitude.
+  hypothesis: >-
+    The closed generic/conditional branch trained on isotropic corruption but was
+    asked at inference to correct an activation while preserving a semantic
+    coordinate. Train/test corruption geometry was therefore mismatched. Training
+    directly on constraint-preserving tangent corruption removes that mismatch.
+    This config trains the prior; whether the resulting prior naturalizes a hard
+    clamp is tested separately (T2) and is not assumed here.
+  independent_variable: corruption geometry (tangent instead of isotropic)
+  controlled_variables:
+    - corpus, tokenizer, model revision, hook, and context length
+    - architecture family, width, block count, time embedding, condition encoder
+    - standardization and the exact raw -> standardized hyperplane transform
+    - optimizer, learning rate, weight decay, warmup, schedule horizon, batch size, dtype, grad clip
+    - training-only direction pool and its provenance digest
+  # NOT controlled, stated explicitly so no paired claim is implied:
+  uncontrolled_variables:
+    - >-
+      noise_seed. This run uses 20260816; the historical FW32M isotropic arm used
+      20260812. Restoring the historical seed would NOT produce paired noise
+      anyway: the tangent sampler draws and consumes the generator differently
+      from the isotropic one, so identical seeds yield different corruption
+      streams. Keeping a distinct seed avoids implying a pairing that cannot
+      exist. No noise-paired or objective-only causal claim may be made against
+      any historical run.
+    - >-
+      training budget and data relative to any 60M historical prior; those differ
+      in capacity and are not objective-only controls.
+  baseline: >-
+    NONE for a causal objective-only claim. The closed branch's isotropic
+    conditional prior may be run through the identical tangent inference path in
+    T1 as a DIAGNOSTIC UNMATCHED REFERENCE only: it differs in capacity, training
+    budget, and noise stream, so it cannot isolate the objective. It is excluded
+    from the formal T1 gate. A causal objective-only comparison would require a
+    separately trained matched 16M isotropic control, which is not authorized.
+    This run is not budget-matched to any historical arm and must not be reported
+    as a scaling cell.
+  metrics:
+    - val_flow_mse (tangent objective; the selection metric)
+    - val_flow_mse_by_bin
+    - zero_predictor_mse
+    - val_cosine_velocity
+    - val_raw_parallel_velocity_mean (diagnostic only, never a selection signal)
+  expected_failure_mode: >-
+    the tangent objective is no easier to learn than the isotropic one and the
+    model does not solve its own matched reconstruction task (T1 FAIL -> stop)
+  success_criterion: >-
+    complete finite run with checkpoints selected only by val_flow_mse; the T1
+    gate is evaluated afterwards and is not part of this config
+
+data:
+  dataset: resid7_fw_train_32000k_v1
+  split: train
+  repository: HuggingFaceFW/fineweb
+  repository_config: sample-10BT
+  repository_revision: 9bb295ddab0e05d785b879661af7260fed5140fc
+  tokenizer: gpt2
+  per_seq: 127
+  val_fraction: 0.05
+  split_seed: 20260807
+  split_fingerprint: 02dad171587ee40f
+  bos_dropped: true
+  steering_vectors_used: false
+
+normalization:
+  statistics_from: train_split_only
+  eps: 1.0e-5
+  accumulation_dtype: float64
+
+# Unchanged from the validated flow_scaling_narrow16m_fw32m_v2 recipe. The only
+# deliberate difference in this branch is the corruption geometry; moving the
+# optimizer at the same time would confound objective and optimization.
+training:
+  seed: 0
+  noise_seed: 20260816
+  steps: 250000
+  batch_size: 1024
+  optimizer: adamw
+  lr: 3.0e-4
+  weight_decay: 0.01
+  schedule: cosine
+  warmup_steps: 500
+  grad_clip: 1.0
+  dtype: float32
+  eval_every: 500
+
+conditioning:
+  # Directions come only from the training-only pool manifest; DEV and held-out
+  # steering vectors never enter training. The manifest carries its own provenance
+  # digest, verified at load time.
+  direction_pool: data/direction_pools/training_only_rank256_v1.pt
+  direction_pool_split: training_only
+  steering_vector_conditioning: false
+  coordinate: linear_projection
+  condition_source: natural_coordinate
+
+flow_objective:
+  # x_t = c v + (1 - t)(x0 - c v) + t (eps - <eps, v> v),  u* = eps_perp - x0_perp
+  type: tangent_constraint_preserving
+  # The velocity used for the loss, for Euler integration, and for reconstruction
+  # is analytically projected into v-perp, so the constraint is exact rather than
+  # learned. The raw parallel component is still recorded as a diagnostic.
+  # docs/PROPOSAL_CONSTRAINT_PRESERVING_TANGENT_FLOW.md section 3.1 preferred the
+  # learn-it variant; that override was approved by the human on 2026-08-16, so
+  # a negative T2 cannot be blamed on coordinate leakage along v. The invariant
+  # is part of the method, not something the network must learn.
+  #
+  # true is the PRIMARY setting for T1 and T2. output_projection: false remains
+  # supported as a possible later ablation and must not be run as part of
+  # primary T1/T2 without separate human authorization.
+  output_projection: true
+
+compute_budget:
+  unique_activation_tokens: 32000063
+  unique_training_tokens: 30400117
+  total_activation_presentations: 256000000
+  approximate_dataset_passes: 8.42
+  optimizer_steps: 250000
+  expected_runtime_minutes: [35, 45]
+
+validation:
+  seed: 0
+  batches: 20
+  t_bins: [0.0, 0.10, 0.25, 0.50, 0.75, 1.0]
+  selection_metric: val_flow_mse
+  selection_mode: min
+  in_run_note: >-
+    Checkpoint selection is concept-independent: tangent flow MSE on this
+    artifact's own held-back 5% document split, with directions drawn only from
+    the training-only pool. No DEV or held-out steering vector, and no steering
+    performance of any kind, may influence checkpoint selection.
+
+checkpoints:
+  save_steps: [25000, 75000, 125000, 175000, 250000]
+  keep: [best, last, configured_steps]
+  include_optimizer_state: true
+
+protected_data:
+  held_out: forbidden
+  dev: forbidden

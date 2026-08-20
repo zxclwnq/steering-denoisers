@@ -1,0 +1,241 @@
+{
+  "experiment_id": "flow_train_tangent_narrow16m_fw32m_v1",
+  "status": "complete",
+  "source_revision": "snapshot-sha256:93eb1617f2105badacf4690856a4ec9f4d4d9106fa54308f48cccd41ef0c6aab",
+  "config_fingerprint": "e4af61135b0205cdcd6f196a61d5af464f0369b29e9bcaa471fd0764e7f85499",
+  "dataset_artifact_identity": {
+    "sha256": {
+      "array": "153f380147d9472ebe0301eb2f8115d711ee688b2b9c7949ee732af234c23184",
+      "metadata": "6b43944a727be39c17a2c149778c19bbd77d3ee24131ed5de427fd521d9ea9d5",
+      "statistics": "41cc69ed6ae7f4f63c2784fcded0d74c6b61178b7e497dd2a9a0141718bc8764"
+    },
+    "token_cache_sha256": "ef44d11b538223a6a97823f6b86f3bed63d5fd8e74569b4577aad4a2faee3aa2"
+  },
+  "direction_pool": {
+    "split": "training_only",
+    "source": "sae:gpt2-small-res-jb/blocks.7.hook_resid_pre@57d08a4fd333fbf18caf3fbea63ceeb88e2f50d9 weights_sha256:47bfb75008fdd7ebf068044c0c3a212606aaa3f5dc05f1d1a7cffe502002c0b6 direction:unit_normalized_W_dec_row universe:23610/24576 labeller:gpt-4o-mini firing_rate:[0.0001,0.02] explanations_sha256:7b2fd33704260489b65e2091115c6ca6a40f5fc3298cc406ecf428b45fc7580f feature_stats_sha256:c27629b4c51b43e2f2906459400e22b9c7742f1902d577132f6671ba2c9f0317 selection_rule_sha256:455ff5bae701d20ddf1d88fc90191c81d7dca1b328c893835a39ab087b262b5e",
+    "selection": "blake2b_priority_rank/interp.selection.stable_order@v2",
+    "selection_seed": 20260807,
+    "min_rank": 256,
+    "excluded_splits": [
+      "dev",
+      "held_out"
+    ],
+    "n_directions": 23354,
+    "digest": "45241c49814abe71ed7106e1a0fcbbe7d8aad40b215621674ec72ee7356d7a2c",
+    "observed_min_rank": 256,
+    "observed_max_rank": 23609
+  },
+  "objective_identity": {
+    "flow_objective": "tangent_constraint_preserving",
+    "condition_type": "direction_coordinate_film",
+    "tangent_output_projection": true,
+    "normalizer": {
+      "width": 768,
+      "eps": 1e-05,
+      "digest": "f07db576d30f8d11643692e5ab1ede93d756ba93211b43d4515d65d1373fd05a"
+    }
+  },
+  "dataset": {
+    "name": "resid7_fw_train_32000k_v1",
+    "status": "complete",
+    "split": "train",
+    "corpus": "fineweb",
+    "dataset_repository": "HuggingFaceFW/fineweb",
+    "dataset_config": "sample-10BT",
+    "dataset_revision": "9bb295ddab0e05d785b879661af7260fed5140fc",
+    "dataset_document_range": [
+      100000,
+      20000000
+    ],
+    "token_manifest": {
+      "corpus": "fineweb",
+      "repository": "HuggingFaceFW/fineweb",
+      "repository_config": "sample-10BT",
+      "repository_revision": "9bb295ddab0e05d785b879661af7260fed5140fc",
+      "split": "train",
+      "document_range": [
+        100000,
+        20000000
+      ],
+      "documents_consumed": 281309,
+      "documents_skipped_short": 29340,
+      "documents_kept": 251969,
+      "raw_text_tokens_seen": 194374417,
+      "tokenizer": "gpt2",
+      "bos_token_id": 50256,
+      "prepend_bos": true,
+      "ctx": 128,
+      "text_tokens_per_sequence": 127,
+      "n_seqs": 251969
+    },
+    "tokenizer": "gpt2",
+    "tokenizer_bos_token_id": 50256,
+    "token_cache_file": "train_251969x128_a3777be851793b64.npy",
+    "token_cache_sha256": "ef44d11b538223a6a97823f6b86f3bed63d5fd8e74569b4577aad4a2faee3aa2",
+    "hook": "blocks.7.hook_resid_pre",
+    "model": "gpt2-small",
+    "resolved_model_name": "gpt2",
+    "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "compute_dtype": "float32",
+    "storage_dtype": "float16",
+    "shape": [
+      32000063,
+      768
+    ],
+    "ctx": 128,
+    "bos_dropped": true,
+    "n_seqs": 251969,
+    "raw_tokens": 32252032,
+    "bos_activations_discarded": 251969,
+    "padding_activations_discarded": 0,
+    "valid_activations": 32000063,
+    "source_revision": "snapshot-sha256:93eb1617f2105badacf4690856a4ec9f4d4d9106fa54308f48cccd41ef0c6aab",
+    "started_utc": "2026-08-16T15:05:18.113887+00:00",
+    "steering_vectors_used": null,
+    "mean_norm": 88.46284393992056,
+    "mean_abs_mean": 0.4885974897907099,
+    "mean_std": 2.308532102668901,
+    "written_tokens": 32000063,
+    "finished_utc": "2026-08-16T15:19:54.794971+00:00",
+    "termination_reason": "completed",
+    "full_validation_report": {
+      "status": "VALID",
+      "name": "resid7_fw_train_32000k_v1",
+      "shape": [
+        32000063,
+        768
+      ],
+      "dtype": "float16",
+      "artifact_split": "train",
+      "model": "gpt2-small",
+      "hook": "blocks.7.hook_resid_pre",
+      "corpus": "fineweb",
+      "dataset_repository": "HuggingFaceFW/fineweb",
+      "dataset_config": "sample-10BT",
+      "dataset_document_range": [
+        100000,
+        20000000
+      ],
+      "token_manifest": {
+        "corpus": "fineweb",
+        "repository": "HuggingFaceFW/fineweb",
+        "repository_config": "sample-10BT",
+        "repository_revision": "9bb295ddab0e05d785b879661af7260fed5140fc",
+        "split": "train",
+        "document_range": [
+          100000,
+          20000000
+        ],
+        "documents_consumed": 281309,
+        "documents_skipped_short": 29340,
+        "documents_kept": 251969,
+        "raw_text_tokens_seen": 194374417,
+        "tokenizer": "gpt2",
+        "bos_token_id": 50256,
+        "prepend_bos": true,
+        "ctx": 128,
+        "text_tokens_per_sequence": 127,
+        "n_seqs": 251969
+      },
+      "dataset_revision": "9bb295ddab0e05d785b879661af7260fed5140fc",
+      "tokenizer": "gpt2",
+      "token_cache_sha256": "ef44d11b538223a6a97823f6b86f3bed63d5fd8e74569b4577aad4a2faee3aa2",
+      "bos_distance_min": 3018.6103515625,
+      "first_position_mean_norm": 95.79090881347656,
+      "other_position_mean_norm": 88.39185333251953,
+      "mean_error_max_abs": 5.110017044174242e-06,
+      "std_error_max_abs": 1.3415239461078698e-05,
+      "split_fingerprint": "02dad171587ee40f",
+      "n_train_tokens": 30400117,
+      "n_val_tokens": 1599946,
+      "train_mean_abs_max": 36.0285530090332,
+      "train_std_min": 0.5765628814697266,
+      "train_std_max": 9.558691024780273,
+      "sha256": {
+        "array": "153f380147d9472ebe0301eb2f8115d711ee688b2b9c7949ee732af234c23184",
+        "metadata": "6b43944a727be39c17a2c149778c19bbd77d3ee24131ed5de427fd521d9ea9d5",
+        "statistics": "41cc69ed6ae7f4f63c2784fcded0d74c6b61178b7e497dd2a9a0141718bc8764"
+      }
+    }
+  },
+  "steps": 250000,
+  "used_config": {
+    "experiment_id": "flow_train_tangent_narrow16m_fw32m_v1",
+    "experiment_class": "tangent_prior_method_development",
+    "held_out": "forbidden",
+    "dataset_name": "resid7_fw_train_32000k_v1",
+    "dataset_repository": "HuggingFaceFW/fineweb",
+    "dataset_config": "sample-10BT",
+    "dataset_revision": "9bb295ddab0e05d785b879661af7260fed5140fc",
+    "tokenizer": "gpt2",
+    "per_seq": 127,
+    "val_fraction": 0.05,
+    "split_seed": 20260807,
+    "split_fingerprint": "02dad171587ee40f",
+    "norm_eps": 1e-05,
+    "model": {
+      "d_model": 768,
+      "d_mlp": 1536,
+      "n_blocks": 3,
+      "time_dim": 256,
+      "time_hidden": 768,
+      "max_period": 10000.0,
+      "activation_dim": null
+    },
+    "training_seed": 0,
+    "noise_seed": 20260816,
+    "steps": 250000,
+    "batch_size": 1024,
+    "lr": 0.0003,
+    "weight_decay": 0.01,
+    "warmup_steps": 500,
+    "grad_clip": 1.0,
+    "eval_every": 500,
+    "eval_batches": 20,
+    "eval_seed": 0,
+    "t_bins": [
+      0.0,
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "selection_metric": "val_flow_mse",
+    "save_steps": [
+      25000,
+      75000,
+      125000,
+      175000,
+      250000
+    ],
+    "keep": [
+      "best",
+      "last",
+      "configured_steps"
+    ],
+    "conditioning": {
+      "condition": {
+        "cond_hidden": 256,
+        "kind": "direction_coordinate_film"
+      },
+      "coordinate": "linear_projection",
+      "direction_pool": "data/direction_pools/training_only_rank256_v1.pt"
+    },
+    "flow_objective": {
+      "type": "tangent_constraint_preserving",
+      "output_projection": true
+    }
+  },
+  "environment": {
+    "python": "3.12.13",
+    "torch": "2.6.0+cu124",
+    "numpy": "2.5.2",
+    "cuda_runtime": "12.4",
+    "device": "cuda",
+    "gpu": "NVIDIA GeForce RTX 3090"
+  },
+  "held_out_accessed": false,
+  "resume_checkpoint": null
+}

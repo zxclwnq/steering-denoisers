@@ -1,0 +1,115 @@
+{
+  "receipt": "tangent_t2_v1",
+  "experiment": "tangent_naturalization_t2_v1",
+  "verdict": "FAIL",
+  "formal_verdict_eligible": true,
+  "decision_rule": "single frozen operating point (t_start 0.10, NFE 1) pooled across the natural-support target quantiles; NOT any-cell-passes",
+  "primary_cell": "pooled_t0.10_nfe1_tangent_flow",
+  "primary_t_start": 0.1,
+  "primary_nfe": 1,
+  "pooled_paired_delta_nll": 0.0061842486262321476,
+  "pooled_ci": [
+    0.001630796287208796,
+    0.010788144897669553
+  ],
+  "bootstrap": {
+    "unit": "direction_cluster_then_sequence",
+    "weighting": "equal_quantile_weight",
+    "quantile_rows_kept_together": true,
+    "n_units": 32,
+    "n_sequences": 64,
+    "n_quantiles": 5,
+    "n_observations": 320,
+    "n_resamples": 2000,
+    "seed": 20260906,
+    "confidence": 0.95
+  },
+  "per_quantile_paired_delta_nll": {
+    "q50": 0.004702478647232056,
+    "q75": 0.005042295902967453,
+    "q90": 0.005572047084569931,
+    "q95": 0.0063633546233177185,
+    "q99": 0.009241066873073578
+  },
+  "fraction_directions_negative": 0.25,
+  "lovo_min": 0.005243753617809666,
+  "lovo_max": 0.006816343338258805,
+  "coordinate_abs_error_max": 5.7220458984375e-06,
+  "coordinate_match": {
+    "max_arm_coordinate_difference": 9.5367431640625e-06,
+    "mean_arm_coordinate_difference": 7.732793336778175e-07,
+    "tolerance": 0.001
+  },
+  "orthogonal_correction_norm_mean": 7.085450226091963,
+  "parallel_correction_norm_mean": 5.610390886202396e-07,
+  "checkpoint_sha256": "066afb601418da89f79b003c97b37227a9aa7702a442ad5f3fb0ab68a4199d4c",
+  "objective_identity": {
+    "flow_objective": "tangent_constraint_preserving",
+    "condition_type": "direction_coordinate_film",
+    "tangent_output_projection": true,
+    "normalizer": {
+      "width": 768,
+      "eps": 1e-05,
+      "digest": "f07db576d30f8d11643692e5ab1ede93d756ba93211b43d4515d65d1373fd05a"
+    }
+  },
+  "direction_pool_digest": "45241c49814abe71ed7106e1a0fcbbe7d8aad40b215621674ec72ee7356d7a2c",
+  "t1_receipt": {
+    "verified": true,
+    "receipt": "tangent_t1_v1",
+    "experiment": "tangent_reconstruction_t1_v1",
+    "verdict": "PASS",
+    "primary_cell": "t0.50_nfe1_tangent",
+    "primary_t_start": 0.5,
+    "primary_nfe": 1,
+    "formal_verdict_eligible": true,
+    "checkpoint_sha256": "066afb601418da89f79b003c97b37227a9aa7702a442ad5f3fb0ab68a4199d4c",
+    "objective_identity": {
+      "flow_objective": "tangent_constraint_preserving",
+      "condition_type": "direction_coordinate_film",
+      "tangent_output_projection": true,
+      "normalizer": {
+        "width": 768,
+        "eps": 1e-05,
+        "digest": "f07db576d30f8d11643692e5ab1ede93d756ba93211b43d4515d65d1373fd05a"
+      }
+    },
+    "direction_pool_digest": "45241c49814abe71ed7106e1a0fcbbe7d8aad40b215621674ec72ee7356d7a2c",
+    "config_fingerprint": "e4af61135b0205cdcd6f196a61d5af464f0369b29e9bcaa471fd0764e7f85499",
+    "source_revision": "snapshot-sha256:93eb1617f2105badacf4690856a4ec9f4d4d9106fa54308f48cccd41ef0c6aab"
+  },
+  "validation_artifact": {
+    "name": "resid7_fw_val_1024k_v1",
+    "artifact_sha256": {
+      "array": "c3c67180ca62c85862f515322d99fbc85f7659880a9f5fdfd895bcd884e1cc9a",
+      "metadata": "a2cc4ac5776ec7816994897a2927c10d8c2fade12a4dd4bba4b8080da5c5a200",
+      "statistics": "643ece1cb21d8cb29f0743db1efc2b62e900c1879ff1c6e0139ef180fb0fe55c"
+    },
+    "token_cache_file": "val_8064x128_ec74f9185b620b6a.npy",
+    "token_cache_sha256": "715b1cc940c321487c1f8242b6880b438547ad4dbbf9b899112367f5275983aa",
+    "split_fingerprint": "5725541eaecf437c",
+    "split": "val",
+    "hook": "blocks.7.hook_resid_pre",
+    "model": "gpt2-small",
+    "resolved_model_name": "gpt2",
+    "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "tokenizer": "gpt2",
+    "ctx": 128,
+    "per_seq": 127,
+    "d_model": 768,
+    "n_seqs": 8064,
+    "n_activations": 1024128,
+    "bos_dropped": true,
+    "dataset_repository": "HuggingFaceFW/fineweb",
+    "dataset_config": "sample-10BT",
+    "dataset_revision": "9bb295ddab0e05d785b879661af7260fed5140fc",
+    "validation_report_status": "VALID"
+  },
+  "source_revision": "snapshot-sha256:234752a0245f4ab73b72d09e7f3d5d1f500bf57ff74a209babbe8931cf4a126c",
+  "stop_rule": "If the tangent-trained flow clearly solves T1 (matched tangent reconstruction) but still does not improve hard-clamp NLL at a fixed coordinate in T2, generative naturalization stops entirely. Do not rescue with more parameters, more NFE, more generic data, another inference projection trick, or LLM judges.",
+  "stop_rule_fired": true,
+  "dev_vectors_accessed": false,
+  "held_out_accessed": false,
+  "llm_judge_used": false,
+  "trained_anything": false
+}

@@ -1,0 +1,23 @@
+{
+  "receipt": "tangent_t1_v1",
+  "experiment": "tangent_reconstruction_t1_v1",
+  "verdict": "PASS",
+  "primary_cell": "t0.50_nfe1_tangent",
+  "primary_t_start": 0.5,
+  "primary_nfe": 1,
+  "formal_verdict_eligible": true,
+  "checkpoint_sha256": "066afb601418da89f79b003c97b37227a9aa7702a442ad5f3fb0ab68a4199d4c",
+  "objective_identity": {
+    "flow_objective": "tangent_constraint_preserving",
+    "condition_type": "direction_coordinate_film",
+    "tangent_output_projection": true,
+    "normalizer": {
+      "width": 768,
+      "eps": 1e-05,
+      "digest": "f07db576d30f8d11643692e5ab1ede93d756ba93211b43d4515d65d1373fd05a"
+    }
+  },
+  "direction_pool_digest": "45241c49814abe71ed7106e1a0fcbbe7d8aad40b215621674ec72ee7356d7a2c",
+  "config_fingerprint": "e4af61135b0205cdcd6f196a61d5af464f0369b29e9bcaa471fd0764e7f85499",
+  "source_revision": "snapshot-sha256:93eb1617f2105badacf4690856a4ec9f4d4d9106fa54308f48cccd41ef0c6aab"
+}
